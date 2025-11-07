@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate logo">
+  <defs>
+    <style>
+      .accent { fill: #4fe2e3; }
+      .primary { fill: #7ad957; }
+    </style>
+  </defs>
+  <!-- Turquoise O -->
+  <circle class="accent" cx="256" cy="200" r="120"/>
+  <!-- Stylized M -->
+  <path class="primary" d="M160,360 L190,188 L236,188 L272,284 L308,188 L354,188 L372,360 L332,360 L320,248 L284,348 L260,348 L224,248 L212,360 Z"/>
+</svg>

@@ -1,0 +1,105 @@
+############################################
+# Global / OS
+############################################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+############################################
+# IDE / Editors
+############################################
+.vscode/
+.idea/
+*.swp
+*.swo
+.history/
+
+############################################
+# Logs
+############################################
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+############################################
+# Environment files
+############################################
+# Keep examples checked-in
+*.env
+.env
+.env.*
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+!server/.env.example
+!client/.env.example
+
+############################################
+# Node / JS / TS
+############################################
+node_modules/
+**/node_modules/
+dist/
+build/
+out/
+tmp/
+temp/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Vite cache
+.vite/
+**/.vite/
+
+############################################
+# Coverage
+############################################
+coverage/
+.nyc_output/
+
+############################################
+# Python
+############################################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+
+############################################
+# Data / Artifacts (adjust as needed)
+############################################
+# Local data outside versioning
+data/
+
+# Large model artifacts
+model/
+artifacts/model/
+artifacts/**/*.pkl
+artifacts/**/*.joblib
+artifacts/**/*.{pt,pth,h5,onnx,bin,sav}
+
+# Datasets (ignored)
+artifacts/data/
+artifacts/**/*.{csv,tsv,parquet,jsonl,xlsx}
+
+# If you need to keep a small sample dataset for tests, move it under a
+# non-ignored path like `artifacts/samples/` and commit only tiny files.
