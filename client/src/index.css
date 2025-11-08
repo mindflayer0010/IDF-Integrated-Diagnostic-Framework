@@ -10,6 +10,7 @@
 	--brand-primary: #7ad957; /* green */
 	--brand-accent: #4fe2e3;  /* turquoise */
 	--brand-text: #0b1115;
+	--gradient-soft: linear-gradient(90deg, rgba(122,217,87,0.15), rgba(79,226,227,0.15));
 }
 
 /* Make native form controls match the Tailwind light theme */
@@ -47,7 +48,7 @@ button:disabled {
 
 .hover-tint:hover { background: color-mix(in srgb, var(--brand-accent) 14%, white); }
 
-.badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 12px; border: 1px solid rgba(0,0,0,0.06); transition: transform .15s ease; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 12px; border: 1px solid rgba(0,0,0,0.06); transition: transform .15s ease, background-color .2s ease; }
 .badge:hover { transform: translateY(-1px); }
 .badge-accent { background: rgba(79,226,227,0.12); color: #075a5a; border-color: rgba(79,226,227,0.3); }
 
@@ -58,3 +59,68 @@ button:disabled {
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
 .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Subtle animated gradient utility for inspirational accents */
+.animated-gradient {
+	background: linear-gradient(120deg, var(--brand-accent), var(--brand-primary), #ffffff);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+}
+@keyframes gradientShift {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+/* Card glow on hover */
+.hover-glow { transition: box-shadow .2s ease, transform .2s ease; }
+.hover-glow:hover { box-shadow: 0 12px 28px rgba(79,226,227,0.25); transform: translateY(-3px); }
+
+/* Enhanced text styling utilities */
+.prose-energized p { position: relative; }
+.prose-energized p::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 6px; background: var(--gradient-soft); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+.prose-energized p:hover::after { opacity: 1; }
+
+.text-gradient {
+	background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.heading-accent {
+	position: relative;
+	display: inline-block;
+	padding-bottom: .25rem;
+}
+.heading-accent::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+	border-radius: 2px;
+	transform: scaleX(.6);
+	transform-origin: left;
+	transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.heading-accent:hover::after {
+	transform: scaleX(1);
+}
+
+.highlight-box {
+	background: linear-gradient(145deg, #ffffff, #f0fdf4);
+	border: 1px solid #d1fae5;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+	transition: box-shadow .3s ease;
+}
+.highlight-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+.callout {
+	padding: 1rem 1.125rem;
+	border-left: 4px solid var(--brand-accent);
+	background: linear-gradient(90deg, rgba(79,226,227,0.08), rgba(122,217,87,0.08));
+	border-radius: .375rem;
+}

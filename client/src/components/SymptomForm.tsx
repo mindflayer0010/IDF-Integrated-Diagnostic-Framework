@@ -76,33 +76,39 @@ export default function SymptomForm({ onResult }: { onResult: (r: Result)=>void 
 
   return (
     <div className="grid gap-4">
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow grid gap-3">
-        <label className="grid gap-1">
+      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow grid gap-3" noValidate>
+        <label className="grid gap-1" htmlFor="spid-input">
           <span className="text-sm text-zinc-600">Patient ID (SPID)</span>
           <div className={`flex items-center border rounded ${!spidDigits || isValidSpid ? '' : 'border-red-500'}`}>
             <span className="px-3 py-2 text-zinc-500 select-none">SPID</span>
             <input
+              id="spid-input"
+              name="spid"
               type="text"
               inputMode="numeric"
+              pattern="\d{4,}"
+              aria-invalid={spidDigits ? (!isValidSpid) : undefined}
               value={spidDigits}
               onChange={e => handleSpidDigitsChange(e.target.value)}
               className="flex-1 px-3 py-2 outline-none"
               placeholder="1234"
+              autoComplete="off"
+              required
             />
           </div>
           {spidDigits && !isValidSpid && (
-            <span className="text-xs text-red-500">Enter at least 4 digits</span>
+            <span className="text-xs text-red-500" role="alert">Enter at least 4 digits</span>
           )}
         </label>
 
         <div className="grid grid-cols-2 gap-2">
           <label className="grid gap-1">
             <span className="text-sm text-zinc-600">Age</span>
-            <input type="number" value={age} onChange={e=>setAge(Number(e.target.value))} className="border rounded px-3 py-2" />
+            <input type="number" min={0} max={120} value={age} onChange={e=>setAge(Number(e.target.value))} className="border rounded px-3 py-2" />
           </label>
           <label className="grid gap-1">
             <span className="text-sm text-zinc-600">Gender</span>
-            <select value={gender} onChange={e=>setGender(e.target.value)} className="border rounded px-3 py-2">
+            <select aria-label="Gender" value={gender} onChange={e=>setGender(e.target.value)} className="border rounded px-3 py-2">
               <option value="M">Male</option>
               <option value="F">Female</option>
               <option value="Other">Other</option>
@@ -186,7 +192,7 @@ export default function SymptomForm({ onResult }: { onResult: (r: Result)=>void 
         </div>
 
         {error && (
-          <div className="text-red-500 text-sm">{error}</div>
+          <div className="text-red-500 text-sm" role="alert">{error}</div>
         )}
 
         <button 

@@ -1,20 +1,24 @@
 import BrandLogo from '../components/BrandLogo';
-import HeroScene from '../components/HeroScene';
+import React, { Suspense } from 'react';
+const HeroScene = React.lazy(() => import('../components/HeroScene'));
+import LoadingSpinner from '../components/LoadingSpinner';
 import Reveal from '../components/Reveal';
 import Tilt from '../components/Tilt';
+import { IconStethoscope, IconScale, IconChart } from '../components/icons';
 
 export default function Landing({ onStartTriage, onViewLogs }: { onStartTriage: () => void; onViewLogs: () => void }) {
   return (
     <div className="min-h-[calc(100vh-140px)]">
       {/* Hero */}
       <section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 via-white to-emerald-50 border border-zinc-200 shadow-sm">
+        <div className="h-1 w-full animated-gradient" aria-hidden="true" />
         <div className="px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
           <Reveal as="div">
             <div className="flex items-center gap-4 mb-6">
               <BrandLogo size={88} />
-              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900">CareMate</h1>
+              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gradient">CareMate</h1>
             </div>
-            <p className="text-lg text-zinc-700 max-w-prose">
+            <p className="text-lg text-zinc-700 max-w-prose prose-energized">
               Fast, consistent, AI-assisted triage. Enter symptoms, get an urgency score and suggested remedies—then review insights on the doctor dashboard.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -26,16 +30,16 @@ export default function Landing({ onStartTriage, onViewLogs }: { onStartTriage: 
             <Reveal as="div" delay={100}>
             <Tilt className="rounded-xl border border-zinc-200 bg-white/80 backdrop-blur p-4 sm:p-6 shadow transition-transform duration-200">
               <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100">
-                  <div className="text-2xl">🩺</div>
+                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100 flex flex-col items-center">
+                  <IconStethoscope className="h-8 w-8 text-cyan-700" />
                   <div className="mt-2 text-sm font-medium text-zinc-800">Symptoms</div>
                 </div>
-                <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-100">
-                  <div className="text-2xl">⚖️</div>
+                <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex flex-col items-center">
+                  <IconScale className="h-8 w-8 text-emerald-700" />
                   <div className="mt-2 text-sm font-medium text-zinc-800">Severity</div>
                 </div>
-                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100">
-                  <div className="text-2xl">📊</div>
+                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100 flex flex-col items-center">
+                  <IconChart className="h-8 w-8 text-cyan-700" />
                   <div className="mt-2 text-sm font-medium text-zinc-800">Urgency</div>
                 </div>
               </div>
@@ -45,7 +49,9 @@ export default function Landing({ onStartTriage, onViewLogs }: { onStartTriage: 
           </div>
         </div>
         {/* Animated background */}
-        <HeroScene className="absolute inset-0 pointer-events-none" />
+        <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center pointer-events-none"><LoadingSpinner label="Preparing scene…" /></div>}>
+          <HeroScene className="absolute inset-0 pointer-events-none" />
+        </Suspense>
         {/* Scroll cue */}
         <button
           type="button"
@@ -68,7 +74,7 @@ export default function Landing({ onStartTriage, onViewLogs }: { onStartTriage: 
           { title: 'Secure & private', desc: 'Backed by MongoDB; each triage is linked to a patient SPID for easy retrieval.' },
         ].map((f, i) => (
           <Reveal key={f.title} delay={100 + i * 80}>
-            <Tilt className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+            <Tilt className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover-glow">
               <div className="text-zinc-900 font-medium">{f.title}</div>
               <div className="mt-1 text-sm text-zinc-600">{f.desc}</div>
             </Tilt>
