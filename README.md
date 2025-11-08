@@ -1,268 +1,237 @@
 <div align="center">
 
-# CareMate
+<!-- Animated gradient banner -->
+<p>
+  <svg width="700" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#22C55E">
+          <animate attributeName="stop-color" values="#22C55E;#3B82F6;#14B8A6;#22C55E" dur="8s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="100%" stop-color="#3B82F6">
+          <animate attributeName="stop-color" values="#3B82F6;#14B8A6;#22C55E;#3B82F6" dur="8s" repeatCount="indefinite" />
+        </stop>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="700" height="80" rx="12" fill="url(#grad)" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="30" font-family="Inter,Segoe UI,Arial,sans-serif" fill="#ffffff" font-weight="600">CareMate</text>
+  </svg>
+</p>
 
-Integrated Diagnostic Framework — privacy‑first triage orchestration
+<p style="margin:4px 0 10px 0;color:#64748b;font-size:14px;">Integrated Diagnostic Framework — privacy-first triage orchestration</p>
 
-[![Privacy First](https://img.shields.io/badge/Privacy--First-22C55E?style=flat&logo=shield&logoColor=22C55E)](#)
-[![Human in the Loop](https://img.shields.io/badge/Human--in--the--Loop-14B8A6?style=flat)](#)
-[![Modular](https://img.shields.io/badge/Modular-3B82F6?style=flat)](#)
+<!-- Typing effect -->
+<p>
+  <svg width="700" height="30" viewBox="0 0 700 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="orchestrating intake to guidance">
+    <defs>
+      <linearGradient id="gradText" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#22C55E"/>
+        <stop offset="100%" stop-color="#3B82F6"/>
+      </linearGradient>
+      <clipPath id="reveal">
+        <rect x="0" y="0" width="0" height="30">
+          <animate attributeName="width" values="0;700;0" keyTimes="0;0.7;1" dur="6s" repeatCount="indefinite" />
+        </rect>
+      </clipPath>
+    </defs>
+    <text x="350" y="20" text-anchor="middle" font-size="14" font-family="Inter,Segoe UI,Arial,sans-serif" fill="url(#gradText)" clip-path="url(#reveal)">orchestrating intake → normalization → guidance</text>
+    <rect x="150" y="6" width="2" height="18" fill="#22C55E" opacity="1">
+      <animate attributeName="x" values="150;550;150" keyTimes="0;0.7;1" dur="6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;1;0;1" dur="0.8s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+</p>
+
+<!-- Badges -->
+<p>
+  <img src="https://img.shields.io/badge/Privacy--First-22C55E?style=flat&logo=shield&logoColor=22C55E" alt="Privacy First" />
+  <img src="https://img.shields.io/badge/Human--in--the--Loop-14B8A6?style=flat" alt="Human in the Loop" />
+  <img src="https://img.shields.io/badge/Modular-3B82F6?style=flat" alt="Modular" />
+</p>
 
 </div>
 
 ---
 
-<details>
-<summary><strong>Table of contents</strong></summary>
+## From Research to Reality
+CareMate began as a research initiative exploring whether machine learning and homeopathy can intersect ethically. What started as a model predicting urgency from symptoms evolved into a complete triage framework integrating privacy, explainability, and tone.
 
-- Guiding principles
-- Novelty & High‑Level Operation
-- Visual: conceptual flow
-- Model Overview (high‑level, sanitized)
-- Usage Instructions (minimal)
-- Local Execution & UI Interaction (non‑sensitive)
+---
 
-</details>
+## The Journey
+- Stage 1 – Spark: Early Python CLI predicted urgency via ensemble ML.
+- Stage 2 – Intelligence: Added classifiers, regressors, and balanced datasets (e.g., Balanced_SPID_Dataset.csv, Remedy_Composition_FINAL_Merged.csv).
+- Stage 3 – Expansion:
+  - Explainable AI (Ollama LLM)
+  - Emotion sensing (MediaPipe / ONNX)
+  - Doctor approval with SPID card for continuity
+- Stage 4 – Prototype: Full stack running locally with no cloud dependency.
 
-# CareMate
+---
 
-> A discreet, end‑to‑end framework for digital symptom intake and guided triage.
+## Why Homeopathy?
+| Challenge | CareMate’s Approach |
+|----------|---------------------|
+| Subjective case reading | Quantified symptom scoring |
+| Manual repertory lookup | ML‑based dynamic mapping |
+| Time‑intensive intake | Automated urgency triage |
+| Static practice data | Continuous adaptive learning |
 
-<div style="border-left: 4px solid #22c55e; padding: 8px 12px; background: #f0fdf4; color:#14532d; margin: 12px 0;">
-<strong>At a glance</strong>
-<ul>
-<li>Captures symptoms and context through a focused UI.</li>
-<li>Returns a calibrated urgency tier and concise guidance.</li>
-<li>Keeps an auditable record for quality and compliance.</li>
-<li>Protects sensitive logic; public docs remain high‑level.</li>
-</ul>
-</div>
+Note: This system is an assistive tool; it augments the clinician rather than replacing judgment.
 
-## Guiding principles
+---
 
-- Privacy first — internals remain confidential by design
-- Separation of concerns — thin coordinator, isolated core
-- Resilience — components can be upgraded/swapped safely
-
-## Usage snapshot
-User submits symptoms → inputs are normalized → protected core evaluates → structured response is returned.
-
-## Access & scope
-This repository exposes only non‑sensitive integration points. Deeper details are available to authorized collaborators.
-
-## Contributing
-Issues welcome for general improvements. Requests touching protected logic are deferred.
-
-## License
-To be added.
-
-## Contact
-Open an issue titled “Access Request”.
-
-## Novelty & High‑Level Operation
-
-<div style="border-left:4px solid #3b82f6;padding:10px 14px;background:#eff6ff;color:#1e3a8a;margin:16px 0;">
-<strong>Core differentiation</strong>: orchestrates triage end‑to‑end while insulating proprietary decision mechanics behind a stable boundary.
-</div>
-
-### What’s novel
-- Audit‑ready orchestration from intake to structured output
-- Stable boundary enables internal core evolution without surface churn
-- Human‑in‑the‑loop posture (guidance, not diagnosis)
-- Minimal necessary signals; privacy‑by‑design
-- Flexible deployment with graceful degradation
-
-### Conceptual flow
-1. Intake
-2. Normalization
-3. Core evaluation
-4. Packaging
-5. Logging
-
-*Description intentionally abstract to protect IP.*
-
-## Model Overview (high‑level, sanitized)
-
-This section provides a conceptual description of the learning approach without disclosing protected implementation details.
-
-### Learning objectives
-- Urgency estimation: supervised regression that maps collected signals to a calibrated urgency score, later discretized into tiers.
-- Guidance classification: supervised multi‑class classifier that suggests a guidance category based on the same normalized signals.
-
-### Inputs (abstracted)
-- Structured symptom descriptors (presence, severity, onset/duration)
-- Limited contextual attributes (e.g., basic demographics and modifiers)
-- Optional free‑text notes processed into compact representations
-
-All inputs are normalized into a minimal schema prior to learning.
-
-### Training approach (conceptual)
-- Supervised learning with cross‑validation and held‑out evaluation
-- Class/target imbalance addressed via sampling and/or cost‑sensitive weighting
-- Probabilistic calibration on outputs to improve decision thresholds
-- Confidence gating and conservative fallbacks for low‑certainty predictions
-
-### Model families (kept generic by design)
-- Standard, well‑established supervised ML families for tabular signals (e.g., ensemble‑based regressors/classifiers and calibrated learners)
-- Optional text representation layers to compress free‑text into features consumed by the tabular learners
-
-Exact architectures, hyperparameters, feature engineering techniques, and training recipes are intentionally withheld to protect ongoing IP and patentable components.
-
-### Outputs
-- A calibrated urgency score mapped into human‑interpretable tiers
-- A guidance label suitable for downstream triage workflows
-- Internal feature‑attribution tooling informs explanations; user‑facing summaries are curated to avoid exposing sensitive internals
-
-### Data notes
-- Training data originates from curated and balanced corpora appropriate for the problem domain
-- Specific sources, preprocessing pipelines, and selection criteria remain confidential
-
-This overview is intentionally high‑level. Authorized collaborators can request deeper documentation under appropriate agreements.
-
-## Usage Instructions (minimal)
-
-These steps describe how to interact with the system at a high level without revealing protected internals.
-
-<div style="border-left:4px solid #22c55e;padding:10px 14px;background:#f0fdf4;color:#14532d;margin:16px 0;">
-<strong>Quick start (local)</strong>
-<ol>
-<li>Start the core services (UI, coordinator, optional decision core).</li>
-<li>Open the UI in your browser.</li>
-<li>Submit symptoms and basic context via the intake form.</li>
-<li>Receive an urgency tier and a concise guidance summary.</li>
-</ol>
-</div>
-
-### Conceptual API interaction
-- Submit normalized symptom/context signals
-- Receive: urgency tier, guidance, and a reference id
-
-<details>
-<summary><strong>Show illustrative request/response</strong></summary>
-
-```json
-{
-  "signals": {
-    "symptoms": ["fever", "cough"],
-    "severity": "moderate",
-    "onsetDays": 3,
-    "modifiers": {"ageBand": "adult"}
-  }
-}
+## Architecture Overview
+```mermaid
+flowchart TD
+A[Symptom Input] --> B[ML Models – Urgency + Remedy + Dosage]
+B --> C[Explainability via LLM (Ollama)]
+C --> D[React + Tailwind Frontend]
+D --> E[Logs / Dashboard]
+E --> F[Doctor Validation Loop]
 ```
 
-Response (conceptual):
-```json
-{
-  "urgencyTier": "moderate",
-  "guidance": "home-care + monitoring",
-  "referenceId": "abc123"
-}
-```
-</details>
+---
 
-Note: Exact endpoints, authentication, and schemas are intentionally omitted in the public README.
+## Model Overview
+| Layer | Model Family | Output |
+|-------|--------------|--------|
+| Urgency Classifier | Balanced Random Forest | Low / Moderate / High |
+| Urgency Regressor | Gradient Boosted | Score 1–10 |
+| Remedy Predictor | Balanced Classifier | Remedy Name |
+| Dosage Mapping | Rule + Dataset | Potency / Frequency |
+| Explainability | LLM (Ollama) | Human‑readable rationale |
+| Emotion Detection | ONNX / MediaPipe | Mood State |
 
-<details>
-<summary><strong>Show illustrative request/response</strong></summary>
+---
 
-```json
-{
-  "signals": {
-    "symptoms": ["fever", "cough"],
-    "severity": "moderate",
-    "onsetDays": 3,
-    "modifiers": {"ageBand": "adult"}
-  }
-}
-```
+## Privacy‑First Triage Flow
+1. Intake → symptoms and context
+2. Evaluation → models estimate urgency and candidate remedy
+3. Explanation → LLM‑based rationale
+4. Tone adaptation → emotion‑aware response
+5. Logging → local records
 
-Response (conceptual):
-```json
-{
-  "urgencyTier": "moderate",
-  "guidance": "home-care + monitoring",
-  "referenceId": "abc123"
-}
-```
-</details>
+Processing is local by default; no tracking or external calls are required.
 
-## Local Execution & UI Interaction (non‑sensitive)
+---
 
-Below is a minimal guide to run the visible layers locally. Proprietary internals are abstracted away.
-
-### 1) Clone repository
-```powershell
+## Setup Guide
+```bash
 git clone https://github.com/mindflayer0010/IDF.git CareMate
 cd CareMate
 ```
-
-### 2) Install client (UI)
-```powershell
-cd client
-npm install
-cd ..
+### Client (UI)
+```bash
+cd client && npm install && npm run dev
 ```
-
-### 3) Install server (coordinator)
-```powershell
-cd server
-npm install
-cd ..
+### Server (Node)
+```bash
+cd server && npm install && npm run dev
 ```
-
-### 4) Optional: start local Python component
-```powershell
+### Optional Python Service
+```bash
 python server/pyservice/predict.py
 ```
-
-### 5) Start services (separate terminals recommended)
-```powershell
-# Terminal A — server
-cd server
-npm run dev
+### Local LLM (Ollama)
+```bash
+ollama pull llama3.1
+ollama serve
 ```
-```powershell
-# Terminal B — client UI
-cd client
-npm run dev
-```
+Open http://localhost:5173
 
-### 6) Open the UI
-Visit the client dev URL (e.g., http://localhost:5173). The server listens on its configured port (e.g., 4000).
+---
 
-### 7) Interact
-Submit a small set of symptoms and context. Review the returned urgency tier and guidance.
+## Tone Adaptation Examples
+| Emotion | System Tone |
+|--------|-------------|
+| Happy | “Let’s keep this quick and light.” |
+| Sad | “I’ll guide you step by step.” |
+| Anxious | “No rush — we’ll take it easy.” |
+| Neutral | “Proceeding with triage now.” |
 
-### 8) Stop
-```powershell
-# In each terminal
-Ctrl + C
-```
+---
 
-### 9) Production build
-```powershell
-# Client
-cd client
-npm run build
-cd ..
+## Logs Dashboard
+- Symptoms entered
+- Urgency and remedy predictions
+- Explanation summary
+- Emotion context
+- Timestamp and Reference ID
+Data is stored locally.
 
-# Server
-cd server
-npm run build
-```
+---
 
-### 10) Troubleshooting
-<div style="border-left:4px solid #ef4444;padding:10px 14px;background:#fef2f2;color:#7f1d1d;margin:16px 0;">
-<strong>Common issues</strong>
-<ul>
-<li><em>Port in use</em>: Adjust dev port via environment variable or client config.</li>
-<li><em>Missing Python component</em>: System falls back; advanced guidance may be limited.</li>
-<li><em>Large model binaries</em>: Use external storage or Git LFS with history cleanup.</li>
-<li><em>ENV not loaded</em>: Ensure local <code>.env</code> exists; restart terminals after edits.</li>
-</ul>
-</div>
+## Disclaimer
+CareMate is a research prototype, not a licensed diagnostic tool. Outputs serve as assistive triage guidance; final decisions remain with qualified practitioners.
 
-<div style="border-left:4px solid #f59e0b;padding:10px 14px;background:#fffbeb;color:#7c2d12;margin:16px 0;">
-<strong>Notes</strong>: keep environment variables in a local .env; advanced guidance may degrade without the Python component; avoid committing large binaries.
-</div>
+---
+
+## Author & Vision
+Soumesh Nanda  
+AI & Robotics Engineer | B.Tech CSE (AI & ML)  
+Amity University Uttar Pradesh, Lucknow
+
+Founder – Machina Speculatrix Robotics Club  
+Organizer – Protosphere Science Expo  
+Inspire Awards ×3 | RMO Zonal | ISRO Chandrayaan‑2 Delegate  
+
+[LinkedIn](https://linkedin.com/in/soumeshnanda) • [GitHub](https://github.com/mindflayer0010)
+
+---
+
+## Media & Status Pulse
+<details>
+<summary><strong>Flow animation (placeholder)</strong></summary>
+
+![Triage Flow](logo/triage_flow.gif "User intake → evaluation → guidance")
+
+</details>
+
+<details>
+<summary><strong>Status pulse (SVG)</strong></summary>
+
+<p>
+  <svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="10" fill="#22C55E">
+      <animate attributeName="r" values="8;10;8" dur="1.6s" repeatCount="indefinite" />
+    </circle>
+    <text x="40" y="24" font-family="Inter, Arial" font-size="14" fill="#334155">core active</text>
+  </svg>
+</p>
+
+</details>
+
+---
+
+## Next Milestones
+- SPID Card integration
+- Auto‑composition cross‑reference
+- Offline LLM enhancements
+- Progressive Web App deployment
+
+“Empathy and computation can coexist when design listens as much as it predicts.”
+
+
+
+### Feature Status Snapshot
+| Area | Status | Notes |
+|------|--------|-------|
+| Urgency Prediction | Stable | Calibrated output tiers |
+| Remedy Suggestion | Experimental | Continuous refinement |
+| Dosage Guidance | Prototype | Rule/data hybrid |
+| Explanation Layer | Active | LLM rationale generation |
+| Emotion Adaptation | Beta | Improving accuracy |
+| Local LLM | Optional | Ollama integration |
+| SPID Card | Planned | Pending workflow design |
+| PWA Support | Planned | Build pipeline review |
+
+### Rapid Navigation
+| Purpose | Link |
+|---------|------|
+| Issues / Enhancements | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework/issues |
+| Pull Requests | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework/pulls |
+| Repository | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework |
+| Author Profile | https://github.com/mindflayer0010 |
+
+> Dynamic shields above reflect repository activity; they help present the README as a living document.
