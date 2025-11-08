@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { postJSON, getJSON } from '../lib/api';
+import SymptomHoneycomb from './SymptomHoneycomb';
+import SymptomLegend from './SymptomLegend';
 
 type Result = { predicted: { UrgencyScore: number | null; UrgencyCategory: string | null; Remedy: string }; dosage: { Concentration: string | null; Dosage: string; Timing: string | null; 'Age Category': string; Gender: string }; composition: { Remedy: string; Source: string; 'Chemical Composition': string }; explanation: string; fallbackUsed: boolean; logId: string | null };
 
@@ -13,16 +15,17 @@ interface PatientHistory {
 
 export default function SymptomForm({ onResult }: { onResult: (r: Result)=>void }){
   const [symptoms, setSymptoms] = useState<Record<string, number>>({});
-  const [currentSymptom, setCurrentSymptom] = useState('');
-  const [currentSeverity, setCurrentSeverity] = useState(0);
+  // Honeycomb replaces manual add/select UI
   const [age, setAge] = useState(25);
   const [gender, setGender] = useState('M');
   const [loading, setLoading] = useState(false);
   const [symptomList, setSymptomList] = useState<string[]>([]);
+  const [filterQuery, setFilterQuery] = useState('');
   const [spidDigits, setSpidDigits] = useState('');
   const [isValidSpid, setIsValidSpid] = useState(false);
   const [patientHistory, setPatientHistory] = useState<PatientHistory[]>([]);
   const [error, setError] = useState('');
+  const [announcement, setAnnouncement] = useState('');
 
   useEffect(() => {
     getJSON('/api/metadata/symptoms').then(setSymptomList).catch(console.error);
@@ -74,6 +77,10 @@ export default function SymptomForm({ onResult }: { onResult: (r: Result)=>void 
     }
   }
 
+  const filteredSymptoms = filterQuery
+    ? symptomList.filter((s) => s.toLowerCase().includes(filterQuery.toLowerCase()))
+    : symptomList;
+
   return (
     <div className="grid gap-4">
       <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow grid gap-3" noValidate>
@@ -116,79 +123,33 @@ export default function SymptomForm({ onResult }: { onResult: (r: Result)=>void 
           </label>
         </div>
         <div className="grid gap-2">
-          <span className="text-sm text-zinc-600">Add Symptoms</span>
-          
-          <div className="flex gap-2">
-            <select 
-              value={currentSymptom} 
-              onChange={e => setCurrentSymptom(e.target.value)}
+          <span className="text-sm text-zinc-600">Select Symptoms</span>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={filterQuery}
+              onChange={(e) => setFilterQuery(e.target.value)}
+              placeholder="Search symptoms..."
               className="border rounded px-3 py-2 flex-1"
-            >
-              <option value="">Select a symptom...</option>
-              {symptomList.map(symptom => (
-                <option key={symptom} value={symptom} disabled={symptom in symptoms}>
-                  {symptom}
-                </option>
-              ))}
-            </select>
-            
-            <select 
-              value={currentSeverity} 
-              onChange={e => setCurrentSeverity(Number(e.target.value))}
-              className="border rounded px-3 py-2 w-24"
-              disabled={!currentSymptom}
-            >
-              <option value={0}>0 - None</option>
-              <option value={1}>1 - Mild</option>
-              <option value={2}>2 - Moderate</option>
-              <option value={3}>3 - Severe</option>
-            </select>
-
-            <button
-              type="button"
-              onClick={() => {
-                if (currentSymptom && currentSeverity > 0) {
-                  setSymptoms(prev => ({
-                    ...prev,
-                    [currentSymptom]: currentSeverity
-                  }));
-                  setCurrentSymptom('');
-                  setCurrentSeverity(0);
-                }
-              }}
-              disabled={!currentSymptom || currentSeverity === 0}
-              className="btn-primary px-3 py-2 rounded disabled:bg-opacity-50 hover-lift"
-            >
-              Add
-            </button>
+              aria-label="Search symptoms"
+            />
+            {filterQuery && (
+              <button type="button" className="text-sm text-zinc-600 hover:underline" onClick={() => setFilterQuery('')}>
+                Clear
+              </button>
+            )}
           </div>
-
-          {Object.keys(symptoms).length > 0 && (
-            <div className="mt-2 border rounded p-2">
-              <div className="text-sm font-medium mb-2">Selected Symptoms:</div>
-              <div className="grid gap-2">
-                {Object.entries(symptoms).map(([symptom, severity]) => (
-                  <div key={symptom} className="flex items-center gap-2 text-sm">
-                    <span className="flex-1">{symptom}</span>
-                    <span className="text-zinc-600">
-                      Severity: {severity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const newSymptoms = { ...symptoms };
-                        delete newSymptoms[symptom];
-                        setSymptoms(newSymptoms);
-                      }}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <SymptomHoneycomb
+            symptoms={filteredSymptoms}
+            selected={symptoms}
+            onChange={setSymptoms}
+            onAnnounce={setAnnouncement}
+          />
+          <SymptomLegend />
+          {filterQuery && filteredSymptoms.length === 0 && (
+            <div className="text-sm text-zinc-500">No symptoms match “{filterQuery}”.</div>
           )}
+          <div className="sr-only" aria-live="polite">{announcement}</div>
         </div>
 
         {error && (

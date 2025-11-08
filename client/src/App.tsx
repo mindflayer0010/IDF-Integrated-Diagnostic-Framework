@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import BrandLogo from './components/BrandLogo';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -10,9 +10,38 @@ const About = React.lazy(() => import('./pages/About'));
 const Docs = React.lazy(() => import('./pages/Docs'));
 const Inspiration = React.lazy(() => import('./pages/Inspiration'));
 import PageTransition from './components/PageTransition';
+import { IconBook, IconChart, IconHome, IconInfo, IconSparkles, IconStethoscope } from './components/icons';
 
 export default function App(): React.ReactElement {
   const [tab, setTab] = useState<'home'|'chat'|'dash'|'about'|'docs'|'inspo'>('home');
+  const navRef = useRef<HTMLDivElement|null>(null);
+  const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [indicator, setIndicator] = useState<{x:number;width:number}>({ x: 0, width: 0 });
+
+  const tabs: Array<{key: typeof tab, label: string, icon: React.ReactNode}> = useMemo(() => ([
+    { key: 'home', label: 'Home', icon: <IconHome className="h-4 w-4" /> },
+    { key: 'chat', label: 'Triage', icon: <IconStethoscope className="h-4 w-4" /> },
+    { key: 'dash', label: 'Logs', icon: <IconChart className="h-4 w-4" /> },
+    { key: 'about', label: 'About', icon: <IconInfo className="h-4 w-4" /> },
+    { key: 'docs', label: 'Docs', icon: <IconBook className="h-4 w-4" /> },
+    { key: 'inspo', label: 'Inspire', icon: <IconSparkles className="h-4 w-4" /> },
+  ]), []);
+
+  useEffect(() => {
+    const update = () => {
+      const container = navRef.current;
+      const active = btnRefs.current[tab];
+      if (!container || !active) return;
+      const cRect = container.getBoundingClientRect();
+      const aRect = active.getBoundingClientRect();
+      const x = aRect.left - cRect.left;
+      const width = aRect.width;
+      setIndicator({ x, width });
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [tab]);
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <header className="p-4 shadow bg-white sticky top-0 z-10 flex items-center justify-between" role="banner">
@@ -20,49 +49,26 @@ export default function App(): React.ReactElement {
           <BrandLogo size={64} />
           <span className="text-xl font-semibold tracking-tight text-gradient select-none">CareMate</span>
         </div>
-        <nav className="space-x-2" role="tablist" aria-label="Primary">
-          <button
-            role="tab"
-            aria-selected={tab==='home'}
-            aria-controls="panel-home"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='home'?'active':''}`}
-            onClick={()=>setTab('home')}
-          >Home</button>
-          <button
-            role="tab"
-            aria-selected={tab==='chat'}
-            aria-controls="panel-chat"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='chat'?'active':''}`}
-            onClick={()=>setTab('chat')}
-          >Triage</button>
-          <button
-            role="tab"
-            aria-selected={tab==='dash'}
-            aria-controls="panel-dash"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='dash'?'active':''}`}
-            onClick={()=>setTab('dash')}
-          >Logs</button>
-          <button
-            role="tab"
-            aria-selected={tab==='about'}
-            aria-controls="panel-about"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='about'?'active':''}`}
-            onClick={()=>setTab('about')}
-          >About</button>
-          <button
-            role="tab"
-            aria-selected={tab==='docs'}
-            aria-controls="panel-docs"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='docs'?'active':''}`}
-            onClick={()=>setTab('docs')}
-          >Docs</button>
-          <button
-            role="tab"
-            aria-selected={tab==='inspo'}
-            aria-controls="panel-inspo"
-            className={`px-3 py-1 rounded btn-outline hover-tint ${tab==='inspo'?'active':''}`}
-            onClick={()=>setTab('inspo')}
-          >Inspire</button>
+        <nav className="fun-tabs" role="tablist" aria-label="Primary" ref={navRef}>
+          <div
+            className="indicator"
+            style={{ transform: `translateX(${indicator.x}px)`, width: indicator.width }}
+            aria-hidden
+          />
+          {tabs.map(t => (
+            <button
+              key={t.key}
+              ref={(el) => { btnRefs.current[t.key] = el; }}
+              role="tab"
+              aria-selected={tab===t.key}
+              aria-controls={`panel-${t.key}`}
+              className="fun-tab flex items-center gap-2"
+              onClick={()=>setTab(t.key)}
+            >
+              <span className="opacity-80">{t.icon}</span>
+              <span>{t.label}</span>
+            </button>
+          ))}
         </nav>
       </header>
       <main className="max-w-4xl mx-auto p-4">

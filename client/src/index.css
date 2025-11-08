@@ -124,3 +124,60 @@ button:disabled {
 	background: linear-gradient(90deg, rgba(79,226,227,0.08), rgba(122,217,87,0.08));
 	border-radius: .375rem;
 }
+
+/* Hex cell shape using clip-path */
+.hex-cell {
+	width: 112px;
+	height: 96px;
+	clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-width: 1px;
+	transition: transform .15s ease, box-shadow .15s ease, background-color .2s ease, border-color .2s ease;
+	will-change: transform;
+	/* Compose 3D depth with optional hover lift via CSS variables */
+	--z: 0px;
+	--ty: 0px;
+	transform: translateZ(var(--z)) translateY(var(--ty));
+}
+.hex-cell:hover { --ty: -2px; }
+
+/* Fun segmented tabs */
+.fun-tabs {
+	position: relative;
+	display: inline-flex;
+	gap: .5rem;
+	padding: .375rem;
+	border: 1px solid color-mix(in srgb, var(--brand-primary) 45%, #c7f9cc);
+	border-radius: 9999px;
+	background: linear-gradient(180deg, #ffffff, #f8fff6);
+	box-shadow: 0 4px 14px rgba(122,217,87,0.15);
+}
+.fun-tab {
+	position: relative;
+	z-index: 1;
+	padding: .5rem .9rem;
+	border-radius: 9999px;
+	font-weight: 500;
+	color: var(--brand-text);
+	transition: transform .18s ease, color .2s ease, filter .2s ease;
+	will-change: transform;
+}
+.fun-tab:hover { transform: translateY(-1px) rotate(-0.25deg); filter: saturate(1.1); }
+.fun-tab:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(79,226,227,.35); }
+.fun-tabs .indicator {
+	position: absolute;
+	inset: 0 auto 0 0;
+	height: calc(100% - .75rem);
+	margin: .375rem 0;
+	width: 0;
+	transform: translateX(0);
+	border-radius: 9999px;
+	background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+	box-shadow: 0 8px 24px rgba(79,226,227,0.25), inset 0 0 0 1px rgba(0,0,0,0.05);
+	transition: transform .35s cubic-bezier(.2,.8,.2,1), width .35s cubic-bezier(.2,.8,.2,1);
+	z-index: 0;
+}
+
