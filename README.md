@@ -21,6 +21,10 @@
 
 <p style="margin:4px 0 10px 0;color:#64748b;font-size:14px;">Integrated Diagnostic Framework — privacy-first triage orchestration</p>
 
+```bash
+
+```
+
 <!-- Typing effect -->
 
 <p>
@@ -195,31 +199,6 @@ Organizer – Protosphere Science Expo
 Inspire Awards ×3 | RMO Zonal | ISRO Chandrayaan‑2 Delegate
 
 [LinkedIn](https://linkedin.com/in/soumeshnanda) • [GitHub](https://github.com/mindflayer0010)
-
----
-
-## Media & Status Pulse
-
-<details>
-<summary><strong>Flow animation (placeholder)</strong></summary>
-
-![Triage Flow](logo/triage_flow.gif "User intake → evaluation → guidance")
-
-</details>
-
-<details>
-<summary><strong>Status pulse (SVG)</strong></summary>
-
-<p>
-  <svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="20" cy="20" r="10" fill="#22C55E">
-      <animate attributeName="r" values="8;10;8" dur="1.6s" repeatCount="indefinite" />
-    </circle>
-    <text x="40" y="24" font-family="Inter, Arial" font-size="14" fill="#334155">core active</text>
-  </svg>
-</p>
-
-</details>
 
 ---
 
