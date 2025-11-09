@@ -104,3 +104,5 @@ artifacts/**/*.{csv,tsv,parquet,jsonl,xlsx}
 # If you need to keep a small sample dataset for tests, move it under a
 # non-ignored path like `artifacts/samples/` and commit only tiny files.
 TODO.md
+.gitignore
+.gitattributes
