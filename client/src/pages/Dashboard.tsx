@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getJSON } from '../lib/api';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 type Log = { _id: string; spid?: string; symptoms: Record<string, number>; age: number; gender: string; predicted: any; createdAt: string };
 type DailyResponse = { today: Log[]; yesterday: Log[] };
@@ -63,10 +64,10 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">Doctor's Dashboard</h2>
+      <h2 className="text-lg font-semibold mb-4 text-gradient">Doctor's Dashboard</h2>
       {error && <div className="text-red-600 text-sm mb-2">{error}</div>}
       {!daily ? (
-        <div className="text-sm text-zinc-500">Loading logs…</div>
+        <LoadingSpinner label="Loading logs…" />
       ) : (
         <>
           <Section title="Today" logs={daily.today} />
