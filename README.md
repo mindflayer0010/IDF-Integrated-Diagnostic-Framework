@@ -21,20 +21,6 @@ The system combines **Explainable AI**, **Emotion Recognition**, and a **High-Fi
 
 ---
 
-## User Interface Experience
-
-CareMate features a "Phenomenal UI" designed for immersion and clarity, utilizing **Three.js** and **Glassmorphism**.
-
-### 1. 3D DNA Hero
-The landing page features a fully interactive, rotating **3D DNA Helix** built with `@react-three/fiber`. This visualization represents the synthesis of biological data and computational logic.
-
-### 2. The Thinking Sphere
-To replace traditional loading indicators, CareMate employs a **pulsing 3D particle sphere**. This animation visualizes the AI's cognitive process during symptom analysis, providing a mesmerizing and reassuring wait experience.
-
-### 3. Smart Categorized Triage
-The triage interface uses a **Smart Tile** system. Symptoms are organized into intuitive categories (General, Pain, Respiratory) within a glassmorphic grid. Tiles interactively expand and illuminate upon selection, offering immediate visual feedback with color-coded severity indicators.
-
----
 
 ## Technical Architecture
 
