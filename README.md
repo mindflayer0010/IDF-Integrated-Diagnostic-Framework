@@ -1,35 +1,6 @@
 <div align="center">
 
-<!-- Animated gradient banner -->
-<p>
-  <svg width="800" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate Banner">
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#10b981">
-          <animate attributeName="stop-color" values="#10b981;#3b82f6;#10b981" dur="8s" repeatCount="indefinite" />
-        </stop>
-        <stop offset="100%" stop-color="#3b82f6">
-          <animate attributeName="stop-color" values="#3b82f6;#10b981;#3b82f6" dur="8s" repeatCount="indefinite" />
-        </stop>
-      </linearGradient>
-    </defs>
-    <rect x="0" y="0" width="800" height="120" rx="15" fill="url(#grad)" />
-    
-    <!-- Animated Text -->
-    <text x="400" y="50" dominant-baseline="middle" text-anchor="middle" font-size="42" font-family="'Segoe UI', sans-serif" fill="#ffffff" font-weight="700" letter-spacing="2">
-      CareMate
-    </text>
-    <text x="400" y="85" dominant-baseline="middle" text-anchor="middle" font-size="14" font-family="'Segoe UI', sans-serif" fill="#e2e8f0" font-weight="400" letter-spacing="1">
-      INTEGRATED DIAGNOSTIC FRAMEWORK
-    </text>
-    
-    <!-- Subtle Pulse Accent -->
-    <circle cx="750" cy="60" r="4" fill="#ffffff">
-      <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
-    </circle>
-  </svg>
-</p>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=40&duration=3000&pause=1000&color=10B981&center=true&vCenter=true&width=800&lines=CareMate;Integrated+Diagnostic+Framework" alt="CareMate Banner" />
 
 <p align="center">
   <img src="https://img.shields.io/badge/Privacy-First-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="Privacy First" />
@@ -127,50 +98,27 @@ Access the application at `http://localhost:5173`.
 
 <div align="center">
 
-<table>
-<tr>
-<td align="center" width="800">
-
 ### Soumesh Nanda
 
-<p>
 <img src="https://img.shields.io/badge/AI_&_Robotics-Engineer-10b981?style=for-the-badge" alt="AI & Robotics Engineer" />
 <img src="https://img.shields.io/badge/B.Tech-CSE_(AI_&_ML)-3b82f6?style=for-the-badge" alt="B.Tech CSE" />
-</p>
 
 **Amity University Uttar Pradesh, Lucknow**
 
-<p>
 <a href="https://linkedin.com/in/soumeshnanda"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 <a href="https://github.com/mindflayer0010"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
-</p>
 
 ---
 
 **Leadership & Recognition**
 
-<table>
-<tr>
-<td>🏆 Founder</td>
-<td>Machina Speculatrix Robotics Club</td>
-</tr>
-<tr>
-<td>🎯 Organizer</td>
-<td>Protosphere Science Expo</td>
-</tr>
-<tr>
-<td>⭐ Awards</td>
-<td>Inspire Awards (x3) | RMO Zonal | ISRO Chandrayaan-2 Delegate</td>
-</tr>
-</table>
+- Founder, Machina Speculatrix Robotics Club
+- Organizer, Protosphere Science Expo
+- Inspire Awards (x3) | RMO Zonal | ISRO Chandrayaan-2 Delegate
 
 ---
 
 > *"Empathy and computation can coexist when design listens as much as it predicts."*
-
-</td>
-</tr>
-</table>
 
 </div>
 
