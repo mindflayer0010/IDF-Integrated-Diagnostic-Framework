@@ -1,4 +1,5 @@
 import { IconStethoscope } from './icons';
+import { Snowflake, Activity } from 'lucide-react';
 
 export type IconProps = { className?: string };
 
@@ -130,9 +131,16 @@ const SvgPill = ({ className = 'h-7 w-7' }: IconProps) => (
   </svg>
 );
 
-// Fallback badge using the first 2 letters of the symptom name
+// Fallback badge using the first letters of words
 function badgeFromName(name: string) {
-  const label = name.trim().slice(0, 2).toUpperCase();
+  const words = name.trim().split(/\s+/);
+  let label = '';
+  if (words.length >= 2) {
+    label = (words[0][0] + words[1][0]).toUpperCase();
+  } else {
+    label = name.trim().slice(0, 2).toUpperCase();
+  }
+
   return function Badge({ className = 'h-7 w-7' }: IconProps) {
     return (
       <svg className={className} viewBox="0 0 24 24" aria-hidden>
@@ -155,7 +163,7 @@ export function getSymptomIcon(name: string) {
   if (/(fever|temperature|pyrex)/.test(n)) return SvgThermometer;
   if (/(cough|breath|lung|asthma|dyspnea|sputum|wheeze)/.test(n)) return SvgLungs;
   if (/(headache|migraine|head)/.test(n)) return SvgHeadache;
-  if (/(nausea|vomit|stomach|abdomen|abdominal|gastric|diarrh)/.test(n)) return SvgStomach;
+  if (/(nausea|vomit|stomach|abdomen|abdominal|gastric|diarrh|appetite)/.test(n)) return SvgStomach;
   if (/(rash|skin|itch|hives|dermat)/.test(n)) return SvgRash;
   if (/(dizzy|vertigo|syncope|faint)/.test(n)) return SvgDizzy;
   if (/(chest pain|palpitation|heart|cardiac)/.test(n)) return SvgHeart;
@@ -165,12 +173,29 @@ export function getSymptomIcon(name: string) {
   if (/(eye|vision|ocular|conjunct)/.test(n)) return SvgEye;
   if (/(back pain|spine|spinal)/.test(n)) return SvgSpine;
   if (/(joint|arthritis|arthralgia|bone)/.test(n)) return SvgBone;
-  if (/(muscle|myalgia|strain)/.test(n)) return SvgBicep;
+  if (/(muscle|myalgia|strain|extremities|weakness)/.test(n)) return SvgBicep;
   if (/(urine|urinary|renal|kidney|uti)/.test(n)) return SvgKidney;
   if (/(anxiety|depress|mood|panic|brain)/.test(n)) return SvgBrain;
   if (/(bleed|hemorr|blood|epistaxis)/.test(n)) return SvgDrop;
   if (/(wound|cut|injury|laceration|bandage)/.test(n)) return SvgBandage;
   if (/(medicine|pill|tablet|capsule)/.test(n)) return SvgPill;
+
+  // Specific fixes
+  if (/(cold|chill)/.test(n)) return Snowflake;
+  if (/(convulsion|spasm|seizure)/.test(n)) return Activity;
+
   // Diverse fallback with initials badge, else stethoscope
   return badgeFromName(name) as any || IconStethoscope;
+}
+
+export function getSymptomCategory(name: string): string {
+  const n = name.toLowerCase();
+  if (/(headache|migraine|pain|ache|cramp|sore)/.test(n)) return 'Pain';
+  if (/(cough|breath|lung|asthma|dyspnea|sputum|wheeze|throat|nose|nasal|rhino|congestion)/.test(n)) return 'Respiratory';
+  if (/(nausea|vomit|stomach|abdomen|gastric|diarrh|appetite|gut|bowel)/.test(n)) return 'Digestive';
+  if (/(fever|temp|sweat|chill|cold|hot)/.test(n)) return 'General';
+  if (/(dizzy|vertigo|faint|syncope|fatigue|weak|tired|sleep|insomnia)/.test(n)) return 'General';
+  if (/(anxiety|depress|mood|panic|brain|confusion|memory)/.test(n)) return 'Neurological';
+  if (/(eye|vision|ear|hearing|skin|rash|itch)/.test(n)) return 'Sensory';
+  return 'Other';
 }

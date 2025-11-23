@@ -1,95 +1,122 @@
+import { Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { Stethoscope, Activity, AlertCircle, ArrowRight } from 'lucide-react';
 import BrandLogo from '../components/BrandLogo';
-import React, { Suspense } from 'react';
-const HeroScene = React.lazy(() => import('../components/HeroScene'));
-import LoadingSpinner from '../components/LoadingSpinner';
 import Reveal from '../components/Reveal';
-import Tilt from '../components/Tilt';
-import { IconStethoscope, IconScale, IconChart } from '../components/icons';
+import HeroScene from '../components/HeroScene';
+import { cn } from '../lib/utils';
 
 export default function Landing({ onStartTriage, onViewLogs }: { onStartTriage: () => void; onViewLogs: () => void }) {
   return (
-    <div className="min-h-[calc(100vh-140px)]">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 via-white to-emerald-50 border border-zinc-200 shadow-sm">
-        <div className="h-1 w-full animated-gradient" aria-hidden="true" />
-        <div className="px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
-          <Reveal as="div">
-            <div className="flex items-center gap-4 mb-6">
-              <BrandLogo size={88} />
-              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gradient">CareMate</h1>
-            </div>
-            <p className="text-lg text-zinc-700 max-w-prose prose-energized">
-              Fast, consistent, AI-assisted triage. Enter symptoms, get an urgency score and suggested remedies—then review insights on the doctor dashboard.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={onStartTriage} className="btn-primary px-5 py-2 rounded hover-lift">Start Triage</button>
-              <button onClick={onViewLogs} className="btn-outline px-5 py-2 rounded hover-tint">View Logs</button>
-            </div>
-          </Reveal>
-          <div className="lg:justify-self-end">
-            <Reveal as="div" delay={100}>
-            <Tilt className="rounded-xl border border-zinc-200 bg-white/80 backdrop-blur p-4 sm:p-6 shadow transition-transform duration-200">
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100 flex flex-col items-center">
-                  <IconStethoscope className="h-8 w-8 text-cyan-700" />
-                  <div className="mt-2 text-sm font-medium text-zinc-800">Symptoms</div>
-                </div>
-                <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex flex-col items-center">
-                  <IconScale className="h-8 w-8 text-emerald-700" />
-                  <div className="mt-2 text-sm font-medium text-zinc-800">Severity</div>
-                </div>
-                <div className="p-4 rounded-lg bg-cyan-50 border border-cyan-100 flex flex-col items-center">
-                  <IconChart className="h-8 w-8 text-cyan-700" />
-                  <div className="mt-2 text-sm font-medium text-zinc-800">Urgency</div>
+    <div className="min-h-[calc(100vh-140px)] flex flex-col gap-12">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50">
+        <div className="absolute inset-0 z-0">
+          <Suspense fallback={<div className="w-full h-full bg-slate-50" />}>
+            <HeroScene />
+          </Suspense>
+        </div>
+
+        <div className="relative z-10 px-6 py-16 sm:px-12 sm:py-24 lg:px-16 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col gap-6">
+            <Reveal>
+              <div className="flex items-center gap-4 mb-4">
+                <BrandLogo size={64} />
+                <div className="px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-sm font-semibold tracking-wide uppercase border border-brand-primary/20">
+                  AI-Powered Triage
                 </div>
               </div>
-              <p className="mt-4 text-sm text-zinc-600">Models run on the server and your entries are saved securely for review.</p>
-            </Tilt>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]">
+                Smart Healthcare <br />
+                <span className="text-gradient">Simplified.</span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <p className="text-lg sm:text-xl text-slate-600 max-w-lg leading-relaxed">
+                Fast, consistent, and secure patient triage. Enter symptoms, get instant urgency scores, and streamline your medical workflow.
+              </p>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <div className="flex flex-wrap gap-4 mt-4">
+                <button onClick={onStartTriage} className="btn-primary group">
+                  Start Triage
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button onClick={onViewLogs} className="btn-secondary">
+                  View Logs
+                </button>
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="lg:justify-self-end w-full max-w-md">
+            <Reveal delay={300}>
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="glass-card p-6 sm:p-8 space-y-6"
+              >
+                <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                  <span className="font-semibold text-slate-900">System Status</span>
+                  <span className="flex items-center gap-2 text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    Operational
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-sky-50 border border-sky-100 flex flex-col items-center text-center gap-2">
+                    <Stethoscope className="w-8 h-8 text-sky-600" />
+                    <span className="text-sm font-medium text-slate-700">Symptom Analysis</span>
+                  </div>
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100 flex flex-col items-center text-center gap-2">
+                    <Activity className="w-8 h-8 text-emerald-600" />
+                    <span className="text-sm font-medium text-slate-700">Urgency Scoring</span>
+                  </div>
+                </div>
+
+                <div className="text-xs text-slate-500 text-center pt-2">
+                  Securely processed on compliant servers.
+                </div>
+              </motion.div>
             </Reveal>
           </div>
         </div>
-        {/* Animated background */}
-        <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center pointer-events-none"><LoadingSpinner label="Preparing scene…" /></div>}>
-          <HeroScene className="absolute inset-0 pointer-events-none" />
-        </Suspense>
-        {/* Scroll cue */}
-        <button
-          type="button"
-          aria-label="Scroll to features"
-          onClick={() => {
-            const el = document.getElementById('features');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
-          className="absolute left-1/2 -bottom-6 -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow border border-zinc-200 flex items-center justify-center animate-bounce-soft"
-        >
-          <span className="text-xl">⌄</span>
-        </button>
       </section>
 
-  {/* Features */}
-      <section id="features" className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Features Grid */}
+      <section className="grid md:grid-cols-3 gap-6">
         {[
-          { title: 'Data‑driven symptoms', desc: 'Dropdown is populated from your dataset; keys are normalized for fewer input errors.' },
-          { title: 'Doctor dashboard', desc: 'Today/Yesterday groups with SPID, remedy, and top symptoms for quick scanning.' },
-          { title: 'Secure & private', desc: 'Backed by MongoDB; each triage is linked to a patient SPID for easy retrieval.' },
+          {
+            title: 'Intelligent Triage',
+            desc: 'Advanced algorithms analyze symptoms to predict urgency with high accuracy.',
+            icon: Stethoscope,
+            color: 'text-sky-500'
+          },
+          {
+            title: 'Real-time Dashboard',
+            desc: 'Monitor patient influx and case severity in real-time for better resource allocation.',
+            icon: Activity,
+            color: 'text-emerald-500'
+          },
+          {
+            title: 'Secure & Private',
+            desc: 'Enterprise-grade security ensures patient data remains protected and confidential.',
+            icon: AlertCircle,
+            color: 'text-purple-500'
+          },
         ].map((f, i) => (
-          <Reveal key={f.title} delay={100 + i * 80}>
-            <Tilt className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover-glow">
-              <div className="text-zinc-900 font-medium">{f.title}</div>
-              <div className="mt-1 text-sm text-zinc-600">{f.desc}</div>
-            </Tilt>
+          <Reveal key={f.title} delay={i * 100}>
+            <div className="glass-card p-6 h-full hover:bg-white/80">
+              <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center bg-slate-50 mb-4", f.color)}>
+                <f.icon className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">{f.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{f.desc}</p>
+            </div>
           </Reveal>
         ))}
-      </section>
-
-      {/* How it works */}
-      <section className="mt-12 rounded-xl border border-zinc-200 bg-white p-6">
-        <Reveal as="h2" className="text-lg font-medium text-zinc-900">How it works</Reveal>
-        <ol className="mt-3 grid sm:grid-cols-3 gap-4 text-sm text-zinc-700">
-          <Reveal as="li" className="rounded-lg border border-zinc-200 p-4" delay={0}>1) Enter SPID, age, gender, and select symptoms + severity.</Reveal>
-          <Reveal as="li" className="rounded-lg border border-zinc-200 p-4" delay={80}>2) We predict urgency and suggest a remedy; everything is saved.</Reveal>
-          <Reveal as="li" className="rounded-lg border border-zinc-200 p-4" delay={160}>3) Doctors review the daily logs and patient history.</Reveal>
-        </ol>
       </section>
     </div>
   );

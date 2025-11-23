@@ -32,8 +32,8 @@ export default function Docs() {
   return (
     <div className="grid gap-8">
       <header className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-        <Reveal as="h1" className="text-2xl font-semibold text-gradient">Documentation</Reveal>
-        <Reveal as="p" delay={60} className="mt-2 text-zinc-700 max-w-prose prose-energized">Quick internal-facing overview of how the system fits together.</Reveal>
+        <Reveal><h1 className="text-2xl font-semibold text-gradient">Documentation</h1></Reveal>
+        <Reveal delay={60}><p className="mt-2 text-zinc-700 max-w-prose prose-energized">Quick internal-facing overview of how the system fits together.</p></Reveal>
         <nav className="mt-4 flex flex-wrap gap-2 text-sm" aria-label="Documentation sections">
           {sections.map(s => (
             <a key={s.id} href={`#${s.id}`} className="badge badge-accent hover-lift">{s.title}</a>
@@ -42,9 +42,11 @@ export default function Docs() {
       </header>
       {sections.map((s, i) => (
         <section key={s.id} id={s.id} className="rounded-xl border border-zinc-200 bg-white p-6 scroll-mt-24">
-          <Reveal as="h2" className="text-lg font-medium heading-accent" delay={i*40}>{s.title}</Reveal>
-          <Reveal as="div" className="prose prose-zinc mt-2 max-w-none" delay={80 + i*40}>
-            <p>{s.body}</p>
+          <Reveal delay={i * 40}><h2 className="text-lg font-medium heading-accent">{s.title}</h2></Reveal>
+          <Reveal delay={80 + i * 40} className="prose prose-zinc mt-2 max-w-none">
+            <div>
+              <p>{s.body}</p>
+            </div>
           </Reveal>
         </section>
       ))}

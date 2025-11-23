@@ -1,88 +1,32 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { getSymptomIcon } from './symptomIcons';
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { getSymptomIcon, getSymptomCategory } from './symptomIcons';
+import { cn } from '../lib/utils';
+import { Info } from 'lucide-react';
 
 type Props = {
   symptoms: string[];
   selected: Record<string, number>; // 0-3
   onChange: (next: Record<string, number>) => void;
   className?: string;
-  onAnnounce?: (message: string) => void; // aria-live announcements
+  onAnnounce?: (message: string) => void;
 };
 
-const SEVERITY_COLORS = [
-  'bg-white border-zinc-200',
-  'bg-cyan-50 border-cyan-200',
-  'bg-emerald-100 border-emerald-300',
-  'bg-emerald-300 border-emerald-500',
+const SEVERITY_CONFIG = [
+  { label: 'None', color: 'bg-white border-slate-200 text-slate-400', ring: 'ring-transparent' },
+  { label: 'Low', color: 'bg-sky-50 border-sky-200 text-sky-600', ring: 'ring-sky-400' },
+  { label: 'Med', color: 'bg-emerald-50 border-emerald-200 text-emerald-600', ring: 'ring-emerald-400' },
+  { label: 'High', color: 'bg-emerald-500 border-emerald-600 text-white', ring: 'ring-emerald-500' },
 ];
 
+const CATEGORIES = ['All', 'General', 'Pain', 'Respiratory', 'Digestive', 'Neurological', 'Sensory', 'Other'];
+
 export default function SymptomHoneycomb({ symptoms, selected, onChange, className = '', onAnnounce }: Props) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // Pointer parallax for subtle 3D feel
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      el.style.transform = `perspective(1000px) rotateX(${py * -6}deg) rotateY(${px * 6}deg)`;
-    };
-    const onLeave = () => {
-      el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    };
-    el.addEventListener('mousemove', onMove);
-    el.addEventListener('mouseleave', onLeave);
-    return () => {
-      el.removeEventListener('mousemove', onMove);
-      el.removeEventListener('mouseleave', onLeave);
-    };
-  }, []);
-
-  const rows = useMemo(() => {
-    const perRow = 6; // refactorable constant
-    const result: string[][] = [];
-    for (let i = 0; i < symptoms.length; i += perRow) {
-      result.push(symptoms.slice(i, i + perRow));
-    }
-    return result;
-  }, [symptoms]);
-
-  // Precompute a pseudo-sphere depth map: map cell index to radial distance
-  const depthMap = useMemo(() => {
-    const positions: { name: string; x: number; y: number }[] = [];
-    rows.forEach((row, rIndex) => {
-      row.forEach((name, cIndex) => {
-        // Offset odd rows for honeycomb staggering
-        const x = cIndex + (rIndex % 2 ? 0.5 : 0);
-        const y = rIndex * 0.9; // vertical compression
-        positions.push({ name, x, y });
-      });
-    });
-    // Normalize coordinates to center
-    const xs = positions.map(p => p.x);
-    const ys = positions.map(p => p.y);
-    const minX = Math.min(...xs), maxX = Math.max(...xs);
-    const minY = Math.min(...ys), maxY = Math.max(...ys);
-    const centerX = (minX + maxX) / 2;
-    const centerY = (minY + maxY) / 2;
-    const radius = Math.max(maxX - minX, maxY - minY) / 2 + 0.0001;
-    const map: Record<string, number> = {};
-    positions.forEach(p => {
-      const dx = (p.x - centerX) / radius;
-      const dy = (p.y - centerY) / radius;
-      const dist = Math.sqrt(dx*dx + dy*dy); // 0 at center
-      // Invert distance so center pops forward; clamp and scale
-      const depth = (1 - Math.min(dist, 1)) * 18; // max 18px translateZ
-      map[p.name] = depth;
-    });
-    return map;
-  }, [rows, symptoms]);
+  const [activeTab, setActiveTab] = useState('All');
 
   const toggle = (name: string) => {
     const curr = selected[name] || 0;
-    const next = (curr + 1) % 4; // 0->1->2->3->0
+    const next = (curr + 1) % 4;
     const copy = { ...selected };
     if (next === 0) delete copy[name]; else copy[name] = next;
     onChange(copy);
@@ -90,57 +34,130 @@ export default function SymptomHoneycomb({ symptoms, selected, onChange, classNa
   };
 
   const resetOne = (name: string) => {
+    if (!selected[name]) return;
     const copy = { ...selected };
     delete copy[name];
     onChange(copy);
     if (onAnnounce) onAnnounce(`${name} reset to 0`);
   };
 
+  // Group symptoms by category
+  const categorizedSymptoms = useMemo(() => {
+    const validSymptoms = symptoms.filter(s => s && s.trim().length > 0);
+    if (activeTab === 'All') return validSymptoms;
+    return validSymptoms.filter(s => getSymptomCategory(s) === activeTab);
+  }, [symptoms, activeTab]);
+
   return (
-    <div className={className}>
-      <div className="mb-2 text-sm text-zinc-600">Click or press Enter/Space to set severity (0–3). Right-click or press “R” to reset. Color intensity increases with severity.</div>
-      <div
-        ref={containerRef}
-        className="transition-transform duration-200 will-change-transform rounded-xl p-4 border border-zinc-200 bg-white shadow-sm"
-        aria-label="Symptom selector"
-      >
-        <div className="relative">
-          <div className="pointer-events-none absolute -inset-8 rounded-[999px] opacity-40" style={{ background: 'radial-gradient(600px at 50% 50%, rgba(79,226,227,.15), transparent 70%)' }} />
-          <div className="relative">
-            {rows.map((row, i) => (
-              <div key={i} className={`flex gap-3 mb-3 ${i % 2 === 1 ? 'ml-8' : ''}`}>
-                {row.map((name) => {
-                  const SevIcon = getSymptomIcon(name);
-                  const sev = selected[name] || 0;
-                  const cls = SEVERITY_COLORS[sev];
-                  const z = depthMap[name] || 0;
-                  return (
-                    <button
-                      key={name}
-                      type="button"
-                      onClick={() => toggle(name)}
-                      onContextMenu={(e) => { e.preventDefault(); resetOne(name); }}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(name); } if (e.key.toLowerCase() === 'r') { resetOne(name); } }}
-                      className={`hex-cell ${cls} hover-glow focus:outline-none focus:ring-2 focus:ring-brand.accent`}
-                      aria-pressed={sev > 0}
-                      aria-label={`${name} severity ${sev}`}
-                      style={{ '--z': `${z}px` } as any }
-                    >
-                      <SevIcon className={`h-6 w-6 ${sev >= 2 ? 'text-emerald-700' : 'text-cyan-700'}`} />
-                      <span className="mt-1 text-[11px] leading-tight text-zinc-800 px-1 text-center line-clamp-2">{name}</span>
-                      <div className="mt-1 flex gap-1" aria-hidden>
-                        {[1,2,3].map(n => (
-                          <span key={n} className={`inline-block h-1.5 w-3 rounded ${sev >= n ? 'bg-emerald-600' : 'bg-zinc-200'}`} />
-                        ))}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className={cn("flex flex-col gap-6", className)}>
+      {/* Category Tabs */}
+      <div className="flex flex-wrap gap-2 justify-center pb-2 border-b border-slate-100">
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveTab(cat)}
+            className={cn(
+              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+              activeTab === cat
+                ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/25 scale-105"
+                : "bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-700"
+            )}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
+
+      <div className="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
+        <Info className="w-3 h-3" />
+        <span>Click to cycle severity. Right-click to reset.</span>
+      </div>
+
+      {/* Smart Grid */}
+      <LayoutGroup>
+        <motion.div
+          layout
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+        >
+          <AnimatePresence mode='popLayout'>
+            {categorizedSymptoms.map((name) => {
+              const SevIcon = getSymptomIcon(name);
+              const sev = selected[name] || 0;
+              const config = SEVERITY_CONFIG[sev];
+              const isSelected = sev > 0;
+
+              return (
+                <motion.button
+                  layout
+                  key={name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => toggle(name)}
+                  onContextMenu={(e) => { e.preventDefault(); resetOne(name); }}
+                  className={cn(
+                    "relative group flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-300 min-h-[120px]",
+                    "outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2",
+                    config.color,
+                    isSelected ? "shadow-md ring-2 " + config.ring : "hover:border-slate-300 hover:bg-slate-50"
+                  )}
+                >
+                  <div className="relative z-10 flex flex-col items-center gap-3">
+                    <div className={cn(
+                      "p-2 rounded-xl transition-all duration-300",
+                      isSelected ? "bg-white/20" : "bg-slate-100 group-hover:bg-white"
+                    )}>
+                      <SevIcon className={cn("w-6 h-6", isSelected ? "text-current" : "text-slate-500")} />
+                    </div>
+                    <span className="text-xs font-semibold text-center leading-tight">
+                      {name}
+                    </span>
+                  </div>
+
+                  {/* Severity Badge */}
+                  {isSelected && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute top-2 right-2"
+                    >
+                      <div className={cn(
+                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shadow-sm",
+                        sev === 3 ? "bg-white text-emerald-600" : "bg-brand-primary text-white"
+                      )}>
+                        {sev}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Progress Bar Indicator */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                    {[1, 2, 3].map((level) => (
+                      <div
+                        key={level}
+                        className={cn(
+                          "w-6 h-1 rounded-full transition-all duration-300",
+                          sev >= level
+                            ? (sev === 3 ? "bg-white/80" : "bg-current")
+                            : "bg-slate-200/50"
+                        )}
+                      />
+                    ))}
+                  </div>
+                </motion.button>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
+      </LayoutGroup>
+
+      {categorizedSymptoms.length === 0 && (
+        <div className="text-center py-12 text-slate-400 italic">
+          No symptoms found in this category.
+        </div>
+      )}
     </div>
   );
 }
