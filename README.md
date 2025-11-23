@@ -108,17 +108,11 @@ Access the application at `http://localhost:5173`.
 <a href="https://linkedin.com/in/soumeshnanda"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 <a href="https://github.com/mindflayer0010"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
 
----
+<br>
 
-**Leadership & Recognition**
-
-- Founder, Machina Speculatrix Robotics Club
-- Organizer, Protosphere Science Expo
-- Inspire Awards (x3) | RMO Zonal | ISRO Chandrayaan-2 Delegate
-
----
-
-> *"Empathy and computation can coexist when design listens as much as it predicts."*
+<p align="center">
+  <i>"Empathy and computation can coexist when design listens as much as it predicts."</i>
+</p>
 
 </div>
 
