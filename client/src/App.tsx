@@ -1,7 +1,11 @@
-import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Home, Stethoscope, FileText, Info, Sparkles, Activity } from 'lucide-react';
 import BrandLogo from './components/BrandLogo';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
+import ThreeBackground from './components/ThreeBackground';
+import { cn } from './lib/utils';
 
 const Landing = React.lazy(() => import('./pages/Landing'));
 const Chat = React.lazy(() => import('./pages/Chat'));
@@ -9,117 +13,87 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const About = React.lazy(() => import('./pages/About'));
 const Docs = React.lazy(() => import('./pages/Docs'));
 const Inspiration = React.lazy(() => import('./pages/Inspiration'));
-import PageTransition from './components/PageTransition';
-import { IconBook, IconChart, IconHome, IconInfo, IconSparkles, IconStethoscope } from './components/icons';
 
 export default function App(): React.ReactElement {
-  const [tab, setTab] = useState<'home'|'chat'|'dash'|'about'|'docs'|'inspo'>('home');
-  const navRef = useRef<HTMLDivElement|null>(null);
-  const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const [indicator, setIndicator] = useState<{x:number;width:number}>({ x: 0, width: 0 });
+  const [tab, setTab] = useState<'home' | 'chat' | 'dash' | 'about' | 'docs' | 'inspo'>('home');
 
-  const tabs: Array<{key: typeof tab, label: string, icon: React.ReactNode}> = useMemo(() => ([
-    { key: 'home', label: 'Home', icon: <IconHome className="h-4 w-4" /> },
-    { key: 'chat', label: 'Triage', icon: <IconStethoscope className="h-4 w-4" /> },
-    { key: 'dash', label: 'Logs', icon: <IconChart className="h-4 w-4" /> },
-    { key: 'about', label: 'About', icon: <IconInfo className="h-4 w-4" /> },
-    { key: 'docs', label: 'Docs', icon: <IconBook className="h-4 w-4" /> },
-    { key: 'inspo', label: 'Inspire', icon: <IconSparkles className="h-4 w-4" /> },
-  ]), []);
+  const tabs = [
+    { key: 'home', label: 'Home', icon: Home },
+    { key: 'chat', label: 'Triage', icon: Stethoscope },
+    { key: 'dash', label: 'Logs', icon: Activity },
+    { key: 'about', label: 'About', icon: Info },
+    { key: 'docs', label: 'Docs', icon: FileText },
+    { key: 'inspo', label: 'Inspire', icon: Sparkles },
+  ] as const;
 
-  useEffect(() => {
-    const update = () => {
-      const container = navRef.current;
-      const active = btnRefs.current[tab];
-      if (!container || !active) return;
-      const cRect = container.getBoundingClientRect();
-      const aRect = active.getBoundingClientRect();
-      const x = aRect.left - cRect.left;
-      const width = aRect.width;
-      setIndicator({ x, width });
-    };
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, [tab]);
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
-      <header className="p-4 shadow bg-white sticky top-0 z-10 flex items-center justify-between" role="banner">
-        <div className="flex items-center gap-3">
-          <BrandLogo size={64} />
-          <span className="text-xl font-semibold tracking-tight text-gradient select-none">CareMate</span>
-        </div>
-        <nav className="fun-tabs" role="tablist" aria-label="Primary" ref={navRef}>
-          <div
-            className="indicator"
-            style={{ transform: `translateX(${indicator.x}px)`, width: indicator.width }}
-            aria-hidden
-          />
-          {tabs.map(t => (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-brand-primary/20 selection:text-brand-primary">
+      <ThreeBackground />
+
+      {/* Floating Navigation Dock */}
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-fit">
+        <nav className="glass p-2 rounded-full flex items-center gap-1 shadow-lg shadow-black/5 ring-1 ring-white/50">
+          <div className="px-4 flex items-center gap-2 border-r border-slate-200/50 mr-2">
+            <BrandLogo size={24} />
+            <span className="font-bold tracking-tight text-slate-800 hidden sm:inline-block">CareMate</span>
+          </div>
+
+          {tabs.map((t) => (
             <button
               key={t.key}
-              ref={(el) => { btnRefs.current[t.key] = el; }}
-              role="tab"
-              aria-selected={tab===t.key}
-              aria-controls={`panel-${t.key}`}
-              className="fun-tab flex items-center gap-2"
-              onClick={()=>setTab(t.key)}
+              onClick={() => setTab(t.key)}
+              className={cn(
+                "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200",
+                tab === t.key ? "text-white" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+              )}
             >
-              <span className="opacity-80">{t.icon}</span>
-              <span>{t.label}</span>
+              {tab === t.key && (
+                <motion.div
+                  layoutId="active-tab"
+                  className="absolute inset-0 bg-brand-primary rounded-full shadow-md shadow-brand-primary/25"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <t.icon className="w-4 h-4" />
+                <span className="hidden md:inline">{t.label}</span>
+              </span>
             </button>
           ))}
         </nav>
       </header>
-      <main className="max-w-4xl mx-auto p-4">
-        <ErrorBoundary fallback={<div className="p-4 border rounded bg-red-50 text-red-800">Failed to load section. Please try again.</div>}>
-          <Suspense fallback={<LoadingSpinner label="Loading section…" /> }>
-            {tab==='home' && (
-              <section id="panel-home" role="tabpanel" aria-labelledby="home">
-                <PageTransition>
-                  <Landing onStartTriage={()=>setTab('chat')} onViewLogs={()=>setTab('dash')} />
-                </PageTransition>
-              </section>
-            )}
-            {tab==='chat' && (
-              <section id="panel-chat" role="tabpanel" aria-labelledby="chat">
-                <PageTransition>
-                  <Chat />
-                </PageTransition>
-              </section>
-            )}
-            {tab==='dash' && (
-              <section id="panel-dash" role="tabpanel" aria-labelledby="dash">
-                <PageTransition>
-                  <Dashboard />
-                </PageTransition>
-              </section>
-            )}
-            {tab==='about' && (
-              <section id="panel-about" role="tabpanel" aria-labelledby="about">
-                <PageTransition>
-                  <About />
-                </PageTransition>
-              </section>
-            )}
-            {tab==='docs' && (
-              <section id="panel-docs" role="tabpanel" aria-labelledby="docs">
-                <PageTransition>
-                  <Docs />
-                </PageTransition>
-              </section>
-            )}
-            {tab==='inspo' && (
-              <section id="panel-inspo" role="tabpanel" aria-labelledby="inspo">
-                <PageTransition>
-                  <Inspiration />
-                </PageTransition>
-              </section>
-            )}
+
+      <main className="pt-32 pb-16 px-4 max-w-7xl mx-auto min-h-screen">
+        <ErrorBoundary fallback={<div className="p-8 border border-red-100 rounded-2xl bg-red-50 text-red-800 text-center">Failed to load section. Please refresh.</div>}>
+          <Suspense fallback={
+            <div className="flex items-center justify-center min-h-[60vh]">
+              <LoadingSpinner label="Loading..." />
+            </div>
+          }>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab}
+                initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-full"
+              >
+                {tab === 'home' && <Landing onStartTriage={() => setTab('chat')} onViewLogs={() => setTab('dash')} />}
+                {tab === 'chat' && <Chat />}
+                {tab === 'dash' && <Dashboard />}
+                {tab === 'about' && <About />}
+                {tab === 'docs' && <Docs />}
+                {tab === 'inspo' && <Inspiration />}
+              </motion.div>
+            </AnimatePresence>
           </Suspense>
         </ErrorBoundary>
       </main>
-      <footer className="text-center text-xs text-zinc-500 p-4">For demonstration only. Not medical advice.</footer>
+
+      <footer className="py-8 text-center text-sm text-slate-400">
+        <p>© {new Date().getFullYear()} CareMate. For demonstration only.</p>
+      </footer>
     </div>
-  )
+  );
 }

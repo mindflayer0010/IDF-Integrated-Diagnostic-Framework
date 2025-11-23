@@ -5,10 +5,10 @@ export default function About() {
   return (
     <div className="grid gap-8">
       <section className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-        <Reveal as="h1" className="text-2xl font-semibold text-gradient">About CareMate</Reveal>
-        <Reveal as="p" delay={80} className="mt-2 text-zinc-700 max-w-prose prose-energized">
+        <Reveal><h1 className="text-2xl font-semibold text-gradient">About CareMate</h1></Reveal>
+        <Reveal delay={80}><p className="mt-2 text-zinc-700 max-w-prose prose-energized">
           CareMate is an AI-assisted triage companion focused on clarity, speed, and privacy. It helps structure symptom intake, provides consistent urgency assessments, and surfaces insights for clinicians.
-        </Reveal>
+        </p></Reveal>
       </section>
 
       <section className="grid md:grid-cols-3 gap-4">
@@ -27,13 +27,13 @@ export default function About() {
       </section>
 
       <section className="rounded-xl border border-zinc-200 bg-white p-6">
-        <Reveal as="h2" className="text-lg font-medium heading-accent">Principles</Reveal>
-        <ul className="mt-3 grid sm:grid-cols-2 gap-2 text-sm text-zinc-700">
-          <Reveal as="li" className="rounded border border-zinc-200 p-3">Human-first: decisions stay with clinicians.</Reveal>
-          <Reveal as="li" className="rounded border border-zinc-200 p-3" delay={60}>Explainability: show the why, not just the what.</Reveal>
-          <Reveal as="li" className="rounded border border-zinc-200 p-3" delay={120}>Safety: conservative defaults and guardrails.</Reveal>
-          <Reveal as="li" className="rounded border border-zinc-200 p-3" delay={180}>Privacy: least-privilege access and auditability.</Reveal>
-        </ul>
+        <Reveal><h2 className="text-lg font-medium heading-accent">Principles</h2></Reveal>
+        <div className="mt-3 grid sm:grid-cols-2 gap-2 text-sm text-zinc-700">
+          <Reveal><div className="rounded border border-zinc-200 p-3">Human-first: decisions stay with clinicians.</div></Reveal>
+          <Reveal delay={60}><div className="rounded border border-zinc-200 p-3">Explainability: show the why, not just the what.</div></Reveal>
+          <Reveal delay={120}><div className="rounded border border-zinc-200 p-3">Safety: conservative defaults and guardrails.</div></Reveal>
+          <Reveal delay={180}><div className="rounded border border-zinc-200 p-3">Privacy: least-privilege access and auditability.</div></Reveal>
+        </div>
       </section>
     </div>
   );
