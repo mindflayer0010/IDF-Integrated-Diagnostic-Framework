@@ -2,38 +2,31 @@
 
 <!-- Animated gradient banner -->
 <p>
-  <svg width="100%" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate Banner">
+  <svg width="800" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate Banner">
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#0f172a">
-          <animate attributeName="stop-color" values="#0f172a;#1e293b;#0f172a" dur="10s" repeatCount="indefinite" />
+        <stop offset="0%" stop-color="#10b981">
+          <animate attributeName="stop-color" values="#10b981;#3b82f6;#10b981" dur="8s" repeatCount="indefinite" />
         </stop>
-        <stop offset="100%" stop-color="#1e293b">
-          <animate attributeName="stop-color" values="#1e293b;#0f172a;#1e293b" dur="10s" repeatCount="indefinite" />
+        <stop offset="100%" stop-color="#3b82f6">
+          <animate attributeName="stop-color" values="#3b82f6;#10b981;#3b82f6" dur="8s" repeatCount="indefinite" />
         </stop>
       </linearGradient>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
     </defs>
     <rect x="0" y="0" width="800" height="120" rx="15" fill="url(#grad)" />
     
     <!-- Animated Text -->
-    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="42" font-family="'Segoe UI', sans-serif" fill="#ffffff" font-weight="700" letter-spacing="2">
+    <text x="400" y="50" dominant-baseline="middle" text-anchor="middle" font-size="42" font-family="'Segoe UI', sans-serif" fill="#ffffff" font-weight="700" letter-spacing="2">
       CareMate
     </text>
-    <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="16" font-family="'Segoe UI', sans-serif" fill="#94a3b8" font-weight="400" letter-spacing="1">
+    <text x="400" y="85" dominant-baseline="middle" text-anchor="middle" font-size="14" font-family="'Segoe UI', sans-serif" fill="#e2e8f0" font-weight="400" letter-spacing="1">
       INTEGRATED DIAGNOSTIC FRAMEWORK
     </text>
     
     <!-- Subtle Pulse Accent -->
-    <circle cx="750" cy="60" r="4" fill="#10b981">
-      <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
+    <circle cx="750" cy="60" r="4" fill="#ffffff">
+      <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
     </circle>
   </svg>
 </p>
@@ -132,22 +125,52 @@ Access the application at `http://localhost:5173`.
 
 ## Author
 
-<div align="left">
+<div align="center">
 
-**Soumesh Nanda**
-<br>
-*AI & Robotics Engineer | B.Tech CSE (AI & ML)*
-<br>
-Amity University Uttar Pradesh, Lucknow
+<table>
+<tr>
+<td align="center" width="800">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/soumeshnanda)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/mindflayer0010)
+### Soumesh Nanda
 
-*   Founder, Machina Speculatrix Robotics Club
-*   Organizer, Protosphere Science Expo
-*   Inspire Awardee (x3) | RMO Zonal Qualifier | ISRO Chandrayaan-2 Delegate
+<p>
+<img src="https://img.shields.io/badge/AI_&_Robotics-Engineer-10b981?style=for-the-badge" alt="AI & Robotics Engineer" />
+<img src="https://img.shields.io/badge/B.Tech-CSE_(AI_&_ML)-3b82f6?style=for-the-badge" alt="B.Tech CSE" />
+</p>
 
-> "Empathy and computation can coexist when design listens as much as it predicts."
+**Amity University Uttar Pradesh, Lucknow**
+
+<p>
+<a href="https://linkedin.com/in/soumeshnanda"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="https://github.com/mindflayer0010"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+</p>
+
+---
+
+**Leadership & Recognition**
+
+<table>
+<tr>
+<td>🏆 Founder</td>
+<td>Machina Speculatrix Robotics Club</td>
+</tr>
+<tr>
+<td>🎯 Organizer</td>
+<td>Protosphere Science Expo</td>
+</tr>
+<tr>
+<td>⭐ Awards</td>
+<td>Inspire Awards (x3) | RMO Zonal | ISRO Chandrayaan-2 Delegate</td>
+</tr>
+</table>
+
+---
+
+> *"Empathy and computation can coexist when design listens as much as it predicts."*
+
+</td>
+</tr>
+</table>
 
 </div>
 
