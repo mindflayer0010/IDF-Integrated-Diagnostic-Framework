@@ -2,148 +2,150 @@
 
 <!-- Animated gradient banner -->
 <p>
-  <svg width="700" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate">
+  <svg width="100%" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate Banner">
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#22C55E">
-          <animate attributeName="stop-color" values="#22C55E;#3B82F6;#14B8A6;#22C55E" dur="8s" repeatCount="indefinite" />
+        <stop offset="0%" stop-color="#0f172a">
+          <animate attributeName="stop-color" values="#0f172a;#1e293b;#0f172a" dur="10s" repeatCount="indefinite" />
         </stop>
-        <stop offset="100%" stop-color="#3B82F6">
-          <animate attributeName="stop-color" values="#3B82F6;#14B8A6;#22C55E;#3B82F6" dur="8s" repeatCount="indefinite" />
+        <stop offset="100%" stop-color="#1e293b">
+          <animate attributeName="stop-color" values="#1e293b;#0f172a;#1e293b" dur="10s" repeatCount="indefinite" />
         </stop>
       </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
-    <rect x="0" y="0" width="700" height="80" rx="12" fill="url(#grad)" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="30" font-family="Inter,Segoe UI,Arial,sans-serif" fill="#ffffff" font-weight="600">CareMate</text>
+    <rect x="0" y="0" width="800" height="120" rx="15" fill="url(#grad)" />
+    
+    <!-- Animated Text -->
+    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="42" font-family="'Segoe UI', sans-serif" fill="#ffffff" font-weight="700" letter-spacing="2">
+      CareMate
+    </text>
+    <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="16" font-family="'Segoe UI', sans-serif" fill="#94a3b8" font-weight="400" letter-spacing="1">
+      INTEGRATED DIAGNOSTIC FRAMEWORK
+    </text>
+    
+    <!-- Subtle Pulse Accent -->
+    <circle cx="750" cy="60" r="4" fill="#10b981">
+      <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
+    </circle>
   </svg>
 </p>
 
-<p style="margin:4px 0 10px 0;color:#64748b;font-size:14px;">Integrated Diagnostic Framework — privacy-first triage orchestration with a <b>phenomenal 3D interface</b>.</p>
-
-<!-- Typing effect -->
-<p>
-  <svg width="700" height="30" viewBox="0 0 700 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="orchestrating intake to guidance">
-    <defs>
-      <linearGradient id="gradText" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#22C55E"/>
-        <stop offset="100%" stop-color="#3B82F6"/>
-      </linearGradient>
-      <clipPath id="reveal">
-        <rect x="0" y="0" width="0" height="30">
-          <animate attributeName="width" values="0;700;0" keyTimes="0;0.7;1" dur="6s" repeatCount="indefinite" />
-        </rect>
-      </clipPath>
-    </defs>
-    <text x="350" y="20" text-anchor="middle" font-size="14" font-family="Inter,Segoe UI,Arial,sans-serif" fill="url(#gradText)" clip-path="url(#reveal)">orchestrating intake → normalization → guidance</text>
-    <rect x="150" y="6" width="2" height="18" fill="#22C55E" opacity="1">
-      <animate attributeName="x" values="150;550;150" keyTimes="0;0.7;1" dur="6s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="1;1;0;1" dur="0.8s" repeatCount="indefinite" />
-    </rect>
-  </svg>
-</p>
-
-<!-- Badges -->
-<p>
-  <img src="https://img.shields.io/badge/Privacy--First-22C55E?style=flat&logo=shield&logoColor=white" alt="Privacy First" />
-  <img src="https://img.shields.io/badge/Human--in--the--Loop-14B8A6?style=flat&logo=human&logoColor=white" alt="Human in the Loop" />
-  <img src="https://img.shields.io/badge/3D--Enhanced-3B82F6?style=flat&logo=three.js&logoColor=white" alt="3D Enhanced" />
-  <img src="https://img.shields.io/badge/AI--Powered-8B5CF6?style=flat&logo=openai&logoColor=white" alt="AI Powered" />
+<p align="center">
+  <img src="https://img.shields.io/badge/Privacy-First-10b981?style=for-the-badge&logo=shield&logoColor=white" alt="Privacy First" />
+  <img src="https://img.shields.io/badge/Architecture-Modular-3b82f6?style=for-the-badge&logo=cube&logoColor=white" alt="Modular" />
+  <img src="https://img.shields.io/badge/Interface-3D_Enhanced-8b5cf6?style=for-the-badge&logo=three.js&logoColor=white" alt="3D Enhanced" />
+  <img src="https://img.shields.io/badge/AI-Explainable-f59e0b?style=for-the-badge&logo=openai&logoColor=white" alt="Explainable AI" />
 </p>
 
 </div>
 
 ---
 
-## 🌟 From Research to Reality
+## Overview
 
-**CareMate** began as a research initiative exploring whether machine learning and homeopathy can intersect ethically. What started as a model predicting urgency from symptoms has evolved into a complete, privacy-first triage framework.
+**CareMate** is a research initiative exploring the ethical intersection of machine learning and homeopathy. It has evolved from a simple urgency predictor into a comprehensive, privacy-first triage framework.
 
-It combines **Explainable AI**, **Emotion Recognition**, and a **State-of-the-Art 3D UI** to provide a compassionate, intelligent, and visually stunning healthcare companion.
-
----
-
-## ✨ Phenomenal UI Experience
-
-CareMate isn't just functional; it's designed to be immersive and beautiful.
-
-### 🧬 3D DNA Hero
-A fully interactive, rotating **3D DNA Helix** greets users on the landing page, symbolizing the intersection of life and data. Built with `Three.js` and `@react-three/fiber`.
-
-### 🧠 The Thinking Sphere
-Gone are boring loading spinners. When CareMate analyzes symptoms, a **pulsing, 3D particle sphere** visualizes the AI's cognitive process, creating a mesmerizing wait experience.
-
-### 🗂️ Smart Categorized Triage
-A sleek, glassmorphic interface organizes symptoms into intuitive categories (General, Pain, Respiratory). **Smart Tiles** light up and expand upon selection, providing immediate visual feedback with severity indicators.
+The system combines **Explainable AI**, **Emotion Recognition**, and a **High-Fidelity 3D Interface** to provide a compassionate, intelligent, and visually immersive healthcare companion.
 
 ---
 
-## 🛠️ Tech Stack
+## User Interface Experience
+
+CareMate features a "Phenomenal UI" designed for immersion and clarity, utilizing **Three.js** and **Glassmorphism**.
+
+### 1. 3D DNA Hero
+The landing page features a fully interactive, rotating **3D DNA Helix** built with `@react-three/fiber`. This visualization represents the synthesis of biological data and computational logic.
+
+### 2. The Thinking Sphere
+To replace traditional loading indicators, CareMate employs a **pulsing 3D particle sphere**. This animation visualizes the AI's cognitive process during symptom analysis, providing a mesmerizing and reassuring wait experience.
+
+### 3. Smart Categorized Triage
+The triage interface uses a **Smart Tile** system. Symptoms are organized into intuitive categories (General, Pain, Respiratory) within a glassmorphic grid. Tiles interactively expand and illuminate upon selection, offering immediate visual feedback with color-coded severity indicators.
+
+---
+
+## Technical Architecture
 
 | Domain | Technologies |
 |:---|:---|
-| **Frontend** | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white) ![Tailwind](https://img.shields.io/badge/-Tailwind-38B2AC?logo=tailwind-css&logoColor=white) ![Three.js](https://img.shields.io/badge/-Three.js-black?logo=three.js&logoColor=white) ![Framer Motion](https://img.shields.io/badge/-Framer_Motion-0055FF?logo=framer&logoColor=white) |
-| **Backend** | ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white) ![Mongoose](https://img.shields.io/badge/-Mongoose-880000?logo=mongoose&logoColor=white) |
-| **AI & ML** | ![Ollama](https://img.shields.io/badge/-Ollama-white?logo=ollama&logoColor=black) ![TensorFlow](https://img.shields.io/badge/-TensorFlow-FF6F00?logo=tensorflow&logoColor=white) ![MediaPipe](https://img.shields.io/badge/-MediaPipe-00B0FF?logo=google&logoColor=white) |
-| **Design** | **Glassmorphism**, **Neumorphism**, **Interactive Particles** |
+| **Frontend** | ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white) ![Three.js](https://img.shields.io/badge/Three.js-black?style=flat-square&logo=three.js&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white) |
+| **Backend** | ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat-square) ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat-square&logo=mongoose&logoColor=white) |
+| **AI & ML** | ![Ollama](https://img.shields.io/badge/Ollama-Local_LLM-white?style=flat-square&logo=ollama&logoColor=black) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white) ![MediaPipe](https://img.shields.io/badge/MediaPipe-Vision-00B0FF?style=flat-square&logo=google&logoColor=white) |
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
--   **🔒 Privacy-First**: All processing happens locally or on your private server. No data leaves your control.
--   **🤖 Explainable AI**: Every diagnosis comes with a "Why" — a human-readable rationale generated by a local LLM.
--   **❤️ Tone Adaptation**: The system detects user emotion (via text or voice) and adapts its response tone (Empathetic, Direct, Reassuring).
--   **📊 Smart Dashboard**: A glassmorphic dashboard to track patient history, urgency distribution, and logs.
-
----
-
-## ⚡ Setup Guide
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/mindflayer0010/IDF.git CareMate
-cd CareMate
-```
-
-### 2. Client (UI)
-```bash
-cd client
-npm install
-npm run dev
-```
-
-### 3. Server (Node)
-```bash
-cd server
-npm install
-npm run dev
-```
-
-### 4. Local LLM (Ollama)
-Ensure [Ollama](https://ollama.com/) is installed and running.
-```bash
-ollama pull llama3.1
-ollama serve
-```
-
-Open **http://localhost:5173** to experience the magic.
+*   **Privacy-First Architecture**: All data processing occurs locally or on a private server. No sensitive patient data is transmitted to external cloud providers.
+*   **Explainable AI (XAI)**: Every diagnostic suggestion is accompanied by a human-readable rationale generated by a local LLM, ensuring transparency.
+*   **Tone Adaptation**: The system analyzes user input (text or voice) to detect emotional state and adapts its response tone accordingly (e.g., Empathetic, Direct, Reassuring).
+*   **Comprehensive Dashboard**: A glassmorphic dashboard provides visualization of patient history, urgency distribution, and system logs.
 
 ---
 
-## 👨‍💻 Author & Vision
+## Setup Instructions
 
-<div align="center">
+### Prerequisites
+*   Node.js (v18+)
+*   Python (v3.9+)
+*   Ollama (for local LLM support)
 
-**Soumesh Nanda**  
-*AI & Robotics Engineer | B.Tech CSE (AI & ML)*  
+### Installation
+
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/mindflayer0010/IDF.git CareMate
+    cd CareMate
+    ```
+
+2.  **Client Application**
+    ```bash
+    cd client
+    npm install
+    npm run dev
+    ```
+
+3.  **Server Application**
+    ```bash
+    cd server
+    npm install
+    npm run dev
+    ```
+
+4.  **Local LLM Service**
+    ```bash
+    ollama pull llama3.1
+    ollama serve
+    ```
+
+Access the application at `http://localhost:5173`.
+
+---
+
+## Author
+
+<div align="left">
+
+**Soumesh Nanda**
+<br>
+*AI & Robotics Engineer | B.Tech CSE (AI & ML)*
+<br>
 Amity University Uttar Pradesh, Lucknow
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/soumeshnanda)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mindflayer0010)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/soumeshnanda)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/mindflayer0010)
 
-Founder – **Machina Speculatrix Robotics Club**  
-Organizer – **Protosphere Science Expo**  
-*Inspire Awards ×3 | RMO Zonal | ISRO Chandrayaan‑2 Delegate*
+*   Founder, Machina Speculatrix Robotics Club
+*   Organizer, Protosphere Science Expo
+*   Inspire Awardee (x3) | RMO Zonal Qualifier | ISRO Chandrayaan-2 Delegate
 
 > "Empathy and computation can coexist when design listens as much as it predicts."
 
@@ -151,15 +153,15 @@ Organizer – **Protosphere Science Expo**
 
 ---
 
-## 🔮 Next Milestones
+## Roadmap
 
-- [ ] **SPID Card Integration**: Portable patient identity.
-- [ ] **Offline LLM Enhancements**: Smaller, faster models for edge devices.
-- [ ] **PWA Deployment**: Install CareMate on any device.
-- [ ] **Voice Interface**: Full voice-to-text triage with emotion analysis.
+*   [ ] **SPID Card Integration**: Implementation of portable patient identity cards.
+*   [ ] **Offline LLM Optimization**: Quantization of models for edge device deployment.
+*   [ ] **PWA Deployment**: Progressive Web App support for cross-platform installation.
+*   [ ] **Voice Interface**: Full-duplex voice triage with real-time emotion analysis.
 
 ---
 
 <div align="center">
-  <sub>CareMate is a research prototype. Outputs serve as assistive guidance; final decisions remain with qualified practitioners.</sub>
+  <p style="color: #64748b; font-size: 0.875rem;">CareMate is a research prototype. Outputs serve as assistive guidance; final decisions remain with qualified practitioners.</p>
 </div>
