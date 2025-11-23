@@ -1,7 +1,6 @@
 <div align="center">
 
 <!-- Animated gradient banner -->
-
 <p>
   <svg width="700" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareMate">
     <defs>
@@ -19,14 +18,9 @@
   </svg>
 </p>
 
-<p style="margin:4px 0 10px 0;color:#64748b;font-size:14px;">Integrated Diagnostic Framework — privacy-first triage orchestration</p>
-
-```bash
-
-```
+<p style="margin:4px 0 10px 0;color:#64748b;font-size:14px;">Integrated Diagnostic Framework — privacy-first triage orchestration with a <b>phenomenal 3D interface</b>.</p>
 
 <!-- Typing effect -->
-
 <p>
   <svg width="700" height="30" viewBox="0 0 700 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="orchestrating intake to guidance">
     <defs>
@@ -49,188 +43,123 @@
 </p>
 
 <!-- Badges -->
-
 <p>
-  <img src="https://img.shields.io/badge/Privacy--First-22C55E?style=flat&logo=shield&logoColor=22C55E" alt="Privacy First" />
-  <img src="https://img.shields.io/badge/Human--in--the--Loop-14B8A6?style=flat" alt="Human in the Loop" />
-  <img src="https://img.shields.io/badge/Modular-3B82F6?style=flat" alt="Modular" />
+  <img src="https://img.shields.io/badge/Privacy--First-22C55E?style=flat&logo=shield&logoColor=white" alt="Privacy First" />
+  <img src="https://img.shields.io/badge/Human--in--the--Loop-14B8A6?style=flat&logo=human&logoColor=white" alt="Human in the Loop" />
+  <img src="https://img.shields.io/badge/3D--Enhanced-3B82F6?style=flat&logo=three.js&logoColor=white" alt="3D Enhanced" />
+  <img src="https://img.shields.io/badge/AI--Powered-8B5CF6?style=flat&logo=openai&logoColor=white" alt="AI Powered" />
 </p>
 
 </div>
 
 ---
 
-## From Research to Reality
+## 🌟 From Research to Reality
 
-CareMate began as a research initiative exploring whether machine learning and homeopathy can intersect ethically. What started as a model predicting urgency from symptoms evolved into a complete triage framework integrating privacy, explainability, and tone.
+**CareMate** began as a research initiative exploring whether machine learning and homeopathy can intersect ethically. What started as a model predicting urgency from symptoms has evolved into a complete, privacy-first triage framework.
 
----
-
-## The Journey
-
-- Stage 1 – Spark: Early Python CLI predicted urgency via ensemble ML.
-- Stage 2 – Intelligence: Added classifiers, regressors, and balanced datasets (e.g., Balanced_SPID_Dataset.csv, Remedy_Composition_FINAL_Merged.csv).
-- Stage 3 – Expansion:
-   - Explainable AI (Ollama LLM)
-   - Emotion sensing (MediaPipe / ONNX)
-   - Doctor approval with SPID card for continuity
-
-- Stage 4 – Prototype: Full stack running locally with no cloud dependency.
+It combines **Explainable AI**, **Emotion Recognition**, and a **State-of-the-Art 3D UI** to provide a compassionate, intelligent, and visually stunning healthcare companion.
 
 ---
 
-## Why Homeopathy?
+## ✨ Phenomenal UI Experience
 
-| Challenge | CareMate’s Approach |
-|----------|---------------------|
-| Subjective case reading | Quantified symptom scoring |
-| Manual repertory lookup | ML‑based dynamic mapping |
-| Time‑intensive intake | Automated urgency triage |
-| Static practice data | Continuous adaptive learning |
+CareMate isn't just functional; it's designed to be immersive and beautiful.
 
-Note: This system is an assistive tool; it augments the clinician rather than replacing judgment.
+### 🧬 3D DNA Hero
+A fully interactive, rotating **3D DNA Helix** greets users on the landing page, symbolizing the intersection of life and data. Built with `Three.js` and `@react-three/fiber`.
 
----
+### 🧠 The Thinking Sphere
+Gone are boring loading spinners. When CareMate analyzes symptoms, a **pulsing, 3D particle sphere** visualizes the AI's cognitive process, creating a mesmerizing wait experience.
 
----
-
-## Model Overview
-
-| Layer | Model Family | Output |
-|-------|--------------|--------|
-| Urgency Classifier | Balanced Random Forest | Low / Moderate / High |
-| Urgency Regressor | Gradient Boosted | Score 1–10 |
-| Remedy Predictor | Balanced Classifier | Remedy Name |
-| Dosage Mapping | Rule + Dataset | Potency / Frequency |
-| Explainability | LLM (Ollama) | Human‑readable rationale |
-| Emotion Detection | ONNX / MediaPipe | Mood State |
+### 🗂️ Smart Categorized Triage
+A sleek, glassmorphic interface organizes symptoms into intuitive categories (General, Pain, Respiratory). **Smart Tiles** light up and expand upon selection, providing immediate visual feedback with severity indicators.
 
 ---
 
-## Privacy‑First Triage Flow
+## 🛠️ Tech Stack
 
-1. Intake → symptoms and context
-2. Evaluation → models estimate urgency and candidate remedy
-3. Explanation → LLM‑based rationale
-4. Tone adaptation → emotion‑aware response
-5. Logging → local records
-
-Processing is local by default; no tracking or external calls are required.
+| Domain | Technologies |
+|:---|:---|
+| **Frontend** | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white) ![Tailwind](https://img.shields.io/badge/-Tailwind-38B2AC?logo=tailwind-css&logoColor=white) ![Three.js](https://img.shields.io/badge/-Three.js-black?logo=three.js&logoColor=white) ![Framer Motion](https://img.shields.io/badge/-Framer_Motion-0055FF?logo=framer&logoColor=white) |
+| **Backend** | ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white) ![Mongoose](https://img.shields.io/badge/-Mongoose-880000?logo=mongoose&logoColor=white) |
+| **AI & ML** | ![Ollama](https://img.shields.io/badge/-Ollama-white?logo=ollama&logoColor=black) ![TensorFlow](https://img.shields.io/badge/-TensorFlow-FF6F00?logo=tensorflow&logoColor=white) ![MediaPipe](https://img.shields.io/badge/-MediaPipe-00B0FF?logo=google&logoColor=white) |
+| **Design** | **Glassmorphism**, **Neumorphism**, **Interactive Particles** |
 
 ---
 
-## Setup Guide
+## 🚀 Key Features
 
+-   **🔒 Privacy-First**: All processing happens locally or on your private server. No data leaves your control.
+-   **🤖 Explainable AI**: Every diagnosis comes with a "Why" — a human-readable rationale generated by a local LLM.
+-   **❤️ Tone Adaptation**: The system detects user emotion (via text or voice) and adapts its response tone (Empathetic, Direct, Reassuring).
+-   **📊 Smart Dashboard**: A glassmorphic dashboard to track patient history, urgency distribution, and logs.
+
+---
+
+## ⚡ Setup Guide
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/mindflayer0010/IDF.git CareMate
 cd CareMate
-
 ```
 
-### Client (UI)
-
+### 2. Client (UI)
 ```bash
-cd client && npm install && npm run dev
-
+cd client
+npm install
+npm run dev
 ```
 
-### Server (Node)
-
+### 3. Server (Node)
 ```bash
-cd server && npm install && npm run dev
-
+cd server
+npm install
+npm run dev
 ```
 
-### Optional Python Service
-
-```bash
-python server/pyservice/predict.py
-
-```
-
-### Local LLM (Ollama)
-
+### 4. Local LLM (Ollama)
+Ensure [Ollama](https://ollama.com/) is installed and running.
 ```bash
 ollama pull llama3.1
 ollama serve
-
 ```
 
-Open http://localhost:5173
+Open **http://localhost:5173** to experience the magic.
 
 ---
 
-## Tone Adaptation Examples
+## 👨‍💻 Author & Vision
 
-| Emotion | System Tone |
-|--------|-------------|
-| Happy | “Let’s keep this quick and light.” |
-| Sad | “I’ll guide you step by step.” |
-| Anxious | “No rush — we’ll take it easy.” |
-| Neutral | “Proceeding with triage now.” |
+<div align="center">
 
----
-
-## Logs Dashboard
-
-- Symptoms entered
-- Urgency and remedy predictions
-- Explanation summary
-- Emotion context
-- Timestamp and Reference ID
-   Data is stored locally.
-
----
-
-## Disclaimer
-
-CareMate is a research prototype, not a licensed diagnostic tool. Outputs serve as assistive triage guidance; final decisions remain with qualified practitioners.
-
----
-
-## Author & Vision
-
-Soumesh Nanda  
-AI & Robotics Engineer | B.Tech CSE (AI & ML)  
+**Soumesh Nanda**  
+*AI & Robotics Engineer | B.Tech CSE (AI & ML)*  
 Amity University Uttar Pradesh, Lucknow
 
-Founder – Machina Speculatrix Robotics Club  
-Organizer – Protosphere Science Expo  
-Inspire Awards ×3 | RMO Zonal | ISRO Chandrayaan‑2 Delegate
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/soumeshnanda)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mindflayer0010)
 
-[LinkedIn](https://linkedin.com/in/soumeshnanda) • [GitHub](https://github.com/mindflayer0010)
+Founder – **Machina Speculatrix Robotics Club**  
+Organizer – **Protosphere Science Expo**  
+*Inspire Awards ×3 | RMO Zonal | ISRO Chandrayaan‑2 Delegate*
+
+> "Empathy and computation can coexist when design listens as much as it predicts."
+
+</div>
 
 ---
 
-## Next Milestones
+## 🔮 Next Milestones
 
-- SPID Card integration
-- Auto‑composition cross‑reference
-- Offline LLM enhancements
-- Progressive Web App deployment
+- [ ] **SPID Card Integration**: Portable patient identity.
+- [ ] **Offline LLM Enhancements**: Smaller, faster models for edge devices.
+- [ ] **PWA Deployment**: Install CareMate on any device.
+- [ ] **Voice Interface**: Full voice-to-text triage with emotion analysis.
 
-“Empathy and computation can coexist when design listens as much as it predicts.”
+---
 
-### Feature Status Snapshot
-
-| Area | Status | Notes |
-|------|--------|-------|
-| Urgency Prediction | Stable | Calibrated output tiers |
-| Remedy Suggestion | Experimental | Continuous refinement |
-| Dosage Guidance | Prototype | Rule/data hybrid |
-| Explanation Layer | Active | LLM rationale generation |
-| Emotion Adaptation | Beta | Improving accuracy |
-| Local LLM | Optional | Ollama integration |
-| SPID Card | Planned | Pending workflow design |
-| PWA Support | Planned | Build pipeline review |
-
-### Rapid Navigation
-
-| Purpose | Link |
-|---------|------|
-| Issues / Enhancements | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework/issues |
-| Pull Requests | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework/pulls |
-| Repository | https://github.com/mindflayer0010/IDF-Integrated-Diagnostic-Framework |
-| Author Profile | https://github.com/mindflayer0010 |
-
-> Dynamic shields above reflect repository activity; they help present the README as a living document.
+<div align="center">
+  <sub>CareMate is a research prototype. Outputs serve as assistive guidance; final decisions remain with qualified practitioners.</sub>
+</div>
