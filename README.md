@@ -110,9 +110,25 @@ Access the application at `http://localhost:5173`.
 
 <br>
 
+<table>
+<tr>
+<td>
+
 <p align="center">
-  <i>"Empathy and computation can coexist when design listens as much as it predicts."</i>
+  <sub>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</sub>
 </p>
+
+<p align="center">
+  <i>"Empathy and computation can coexist<br>when design listens as much as it predicts."</i>
+</p>
+
+<p align="center">
+  <sub>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</sub>
+</p>
+
+</td>
+</tr>
+</table>
 
 </div>
 
